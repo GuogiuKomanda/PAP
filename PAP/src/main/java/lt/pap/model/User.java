@@ -1,5 +1,7 @@
 package lt.pap.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,9 +11,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "pap", name = "user")
-public class User {
+public class User implements Serializable{
 
-    @Id
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5132176331654116607L;
+
+
+	@Id
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 

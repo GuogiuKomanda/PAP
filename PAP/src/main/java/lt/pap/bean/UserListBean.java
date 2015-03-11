@@ -1,6 +1,6 @@
 package lt.pap.bean;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,21 +14,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
-public class UserListBean
+public class UserListBean implements Serializable
 {
     
-    @Autowired
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1046431391905019637L;
+
+	@Autowired
     private UserService userService;
     
     private List<User>  userList;
-    
-    public UserListBean()
-    {
-        userList = new ArrayList<User>();
-        User u = new User();
-        u.setId(5);
-        u.setName("Petia");
-    }
     
     @PostConstruct
     void init()
