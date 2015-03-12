@@ -34,27 +34,30 @@ public class SpringDataConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setUrl(environment.getProperty("db.url"));
-		dataSource
-				.setDriverClassName(environment.getProperty("db.driverClass"));
+		dataSource.setDriverClassName(environment.getProperty("db.driverClass"));
 		dataSource.setUsername(environment.getProperty("db.username"));
 		dataSource.setPassword(environment.getProperty("db.password"));
 		return dataSource;
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory()
-			throws NamingException {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
 
 		Properties properties = new Properties();
-		properties.put("hibernate.dialect",
-				environment.getProperty("hibernate.dialect"));
-		properties.put("hibernate.show_sql",
-				environment.getProperty("hibernate.showSQL"));
-		properties.put("hibernate.format_sql",
-				environment.getProperty("hibernate.formatSQL"));
-
+		
+		
+		
+		properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+		properties.put("hibernate.show_sql",  environment.getProperty("hibernate.showSQL"));
+		properties.put("hibernate.format_sql", environment.getProperty("hibernate.formatSQL"));
+		//properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+		
+		properties.put("javax.persistence.schema-generation.scripts.action", "create");
+		properties.put("javax.persistence.schema-generation.create-source", "metadata");
+		properties.put("javax.persistence.schema-generation.scripts.create-target", "sql/create-schema.sql");
+		 
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource());
 		entityManagerFactoryBean.setPackagesToScan("lt.pap.model");
