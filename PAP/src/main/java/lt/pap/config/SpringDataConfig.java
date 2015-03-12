@@ -56,7 +56,7 @@ public class SpringDataConfig {
 		
 		properties.put("javax.persistence.schema-generation.scripts.action", "create");
 		properties.put("javax.persistence.schema-generation.create-source", "metadata");
-		properties.put("javax.persistence.schema-generation.scripts.create-target", "sql/create-schema.sql");
+		properties.put("javax.persistence.schema-generation.scripts.create-target", "sql/generated/create-schema.sql");
 		 
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource());
