@@ -56,7 +56,7 @@ public class InitDB {
 
     translation = new PartTranslated();
     translation.setName("Variklis");
-    translation.setDescription("variklio aprašymas");
+    translation.setDescription("variklio apra\u0161ymas");
     part.getTranslated().put("lt", translation);
 
     partService.save(part);
