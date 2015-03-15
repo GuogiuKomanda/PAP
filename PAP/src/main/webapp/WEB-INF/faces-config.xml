@@ -8,4 +8,10 @@
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
+
+	<locale-config>
+		<default-locale>en</default-locale>
+	</locale-config>
+	
+	
 </faces-config>

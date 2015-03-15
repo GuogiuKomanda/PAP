@@ -59,6 +59,12 @@
             <version>${spring.version}</version>
         </dependency>
         
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+        
 		<!-- Spring Data -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -70,7 +76,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.16.Final</version>
+			<version>4.3.8.Final</version>
 		</dependency>
 
 		<!-- Utilities -->

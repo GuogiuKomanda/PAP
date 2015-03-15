@@ -14,28 +14,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
-public class UserListBean implements Serializable
-{
-    
-    /**
+public class UserListBean implements Serializable {
+
+  /**
 	 * 
 	 */
-	private static final long serialVersionUID = -1046431391905019637L;
+  private static final long serialVersionUID = -1046431391905019637L;
 
-	@Autowired
-    private UserService userService;
-    
-    private List<User>  userList;
-    
-    @PostConstruct
-    void init()
-    {
-        userList = userService.findAll();
-    }
-    
-    public List<User> getUserList()
-    {
-        return userList;
-    }
-    
+  @Autowired
+  private UserService userService;
+
+  private List<User> userList;
+
+  @PostConstruct
+  void init() {
+    userList = userService.findAll();
+  }
+
+  public List<User> getUserList() {
+    return userList;
+  }
+
 }

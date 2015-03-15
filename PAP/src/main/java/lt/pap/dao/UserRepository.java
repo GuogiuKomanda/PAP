@@ -4,10 +4,10 @@ import lt.pap.model.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Long countByName(String name);
+  Long countByName(String name);
 
-    //User findByName(String name, String lastName);
+  // User findByName(String name, String lastName);
 
 }

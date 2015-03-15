@@ -1,8 +1,5 @@
 package utils;
 
-import java.util.Locale;
-
-import lt.pap.config.SpringDataConfig;
 import lt.pap.model.Part;
 import lt.pap.model.PartTranslated;
 import lt.pap.model.User;
@@ -25,13 +22,10 @@ public class InitDB {
   @Autowired
   private PartService partService;
 
-  // @Autowired
-  // private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
   @Test
   public void init() {
 
-    // entityManagerFactory.getJpaPropertyMap().put("hibernate.hbm2ddl.auto", "create");
     // clean
     // userService.deleteAll();
     // partService.deleteAll();

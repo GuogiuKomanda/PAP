@@ -1,36 +1,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:s="http://www.springframework.org/tags"  
+		xmlns:a4j="http://richfaces.org/a4j" 
+		xmlns:rich="http://richfaces.org/rich">
 <h:head>
-	<link
-		href="#{facesContext.externalContext.requestContextPath}/css/custom.css"
-		type="text/css" rel="stylesheet" />
+	<link href="#{facesContext.externalContext.requestContextPath}/css/custom.css" type="text/css" rel="stylesheet" />
 </h:head>
 <h:body>
 	<h:form id="main">
-		<rich:dataTable value="#{userListBean.userList}" var="u" id="table" rows="30">
-            <f:facet name="noData">
+	
+		<h:panelGrid columns="2">
+			<h:outputText value="Language:"/> 
+			<h:selectOneMenu value="#{sessionBean.localeString}">
+					<f:selectItems value="#{sessionBean.supportedLocales}" />
+					<f:ajax listener="#{sessionBean.localeChanged}" render="main" />
+			</h:selectOneMenu>
+		</h:panelGrid>
+ 
+		<h3>
+			<h:outputText value="#{msg['hello']}"/>
+		</h3>
+
+		<rich:dataTable value="#{userListBean.userList}" var="u" id="usersTable" rows="30">
+			<f:facet name="noData">
                 Nothing found
             </f:facet>
 
-            <rich:column>
-                <f:facet name="header">
-                    <h:outputText value="ID"/>
-                </f:facet>
-                <h:outputText value="#{u.id}"/>
-            </rich:column>
-            
-            <rich:column>
-                <f:facet name="header">
-                    <h:outputText value="Vardas"/>
-                </f:facet>
-                <h:outputText value="#{u.name}"/>
-            </rich:column>
-        </rich:dataTable>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['user.id']}" />
+				</f:facet>
+				<h:outputText value="#{u.id}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['user.name']}" />
+				</f:facet>
+				<h:outputText value="#{u.name}" />
+			</rich:column>
+		</rich:dataTable>
+
+		<p></p>
+		
+		<rich:dataTable value="#{partListBean.partList}" var="p" id="partsTable" rows="30">
+			<f:facet name="noData">
+                Nothing found
+            </f:facet>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['part.id']}" />
+				</f:facet>
+				<h:outputText value="#{p.id}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['part.name']}" />
+				</f:facet>
+				<h:outputText value="#{p.name}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['part.description']}" />
+				</f:facet>
+				<h:outputText value="#{p.description}" />
+			</rich:column>
+
+		</rich:dataTable>
 	</h:form>
 </h:body>
 </html>

@@ -13,30 +13,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+  @Autowired
+  private UserRepository userRepository;
 
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
+  public List<User> findAll() {
+    return userRepository.findAll();
+  }
 
-    public User findOne(int id) {
-        return userRepository.findOne(id);
-    }
+  public User findOne(long id) {
+    return userRepository.findOne(id);
+  }
 
-    public long count() {
-        return userRepository.count();
-    }
+  public long count() {
+    return userRepository.count();
+  }
 
-    public User save(User user) {
-        return userRepository.save(user);
-    }
+  public User save(User user) {
+    return userRepository.save(user);
+  }
 
-    public boolean exists(Integer userId) {
-        return userRepository.exists(userId);
-    }
+  public boolean exists(Long userId) {
+    return userRepository.exists(userId);
+  }
 
-    public long countByName(String name) {
-        return userRepository.countByName(name);
-    }
+  public long countByName(String name) {
+    return userRepository.countByName(name);
+  }
+
+  public void deleteAll() {
+    userRepository.deleteAll();
+  }
 }
