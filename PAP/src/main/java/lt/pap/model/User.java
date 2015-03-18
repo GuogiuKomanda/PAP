@@ -1,6 +1,8 @@
 package lt.pap.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.YearMonth;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -21,8 +26,12 @@ public class User implements Serializable {
   @Id
   private Long id;
 
-  @Column(name = "name", nullable = false, length = 255)
+  @Column(name = "name", nullable = false, length = 40)
   private String name;
+  
+  @Column(name = "test_date", nullable = false)
+ //@DateTimeFormat(pattern = "yyyy-mm")
+  private YearMonth date;
 
   public Long getId() {
     return id;
@@ -38,6 +47,14 @@ public class User implements Serializable {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public YearMonth getDate() {
+    return date;
+  }
+
+  public void setDate(YearMonth date) {
+    this.date = date;
   }
 
 }

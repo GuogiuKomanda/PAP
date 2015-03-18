@@ -1,5 +1,9 @@
 package utils;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
+
 import lt.pap.model.Part;
 import lt.pap.model.PartTranslated;
 import lt.pap.model.User;
@@ -30,19 +34,27 @@ public class InitDB {
     // userService.deleteAll();
     // partService.deleteAll();
 
+    YearMonth date = YearMonth.of(2005, Month.JANUARY);
     // init users
     User user = new User();
     user.setName("Antanas");
+    user.setDate(date);
 
     userService.save(user);
 
+    date = YearMonth.of(1999, Month.MARCH);
+    
     user = new User();
     user.setName("Andrius");
+    user.setDate(date);
 
     userService.save(user);
+    
+    date = YearMonth.of(2000, Month.JUNE);
 
     user = new User();
     user.setName("Jonas");
+    user.setDate(date);
 
     user = userService.save(user);
 

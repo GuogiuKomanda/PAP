@@ -14,7 +14,7 @@ public class PartTranslated implements java.io.Serializable {
   private String name;
   private String description;
 
-  @Column(name = "name")
+  @Column(name = "name", nullable = false, length = 40)
   public String getName() {
     return name;
   }
@@ -23,7 +23,7 @@ public class PartTranslated implements java.io.Serializable {
     this.name = name;
   }
 
-  @Column(name = "description")
+  @Column(name = "description", nullable = false, length = 120)
   public String getDescription() {
     return this.description;
   }
