@@ -99,14 +99,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>4.1.0.RELEASE</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope>test</scope>
 		</dependency>
 		
 		<!-- JSF -->
@@ -144,14 +142,12 @@
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
             <version>2.2.5</version>
-            <scope>provided</scope>
         </dependency>
         <!-- EL -->
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
             <version>2.2.6</version>
-            <scope>provided</scope>
         </dependency>
 		<!-- Richfaces -->
 		<dependency>
