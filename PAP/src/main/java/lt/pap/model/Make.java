@@ -27,7 +27,7 @@ public class Make implements Serializable {
     private Long id;
     
     @Column(name = "make", nullable = false, length = 40)
-    private String make;
+    private String makeName;
 
     public Long getId()
     {
@@ -39,15 +39,11 @@ public class Make implements Serializable {
         this.id = id;
     }
 
-    public String getMake()
-    {
-        return make;
+    public String getMakeName() {
+      return makeName;
     }
 
-    public void setMake(String make)
-    {
-        this.make = make;
+    public void setMakeName(String makeName) {
+      this.makeName = makeName;
     }
-    
-    
 }

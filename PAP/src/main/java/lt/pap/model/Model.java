@@ -25,39 +25,32 @@ public class Model implements Serializable {
     
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="make_id")
-    private Make make_id;
+    private Make make;
     
     @Column(name = "model", nullable = false, length = 40)
-    private String model;
+    private String modelName;
 
-    public Long getId()
-    {
-        return id;
+    public Long getId() {
+      return id;
     }
 
-    public void setId(Long id)
-    {
-        this.id = id;
+    public void setId(Long id) {
+      this.id = id;
     }
 
-    public Make getMake_id()
-    {
-        return make_id;
+    public Make getMake() {
+      return make;
     }
 
-    public void setMake_id(Make make_id)
-    {
-        this.make_id = make_id;
+    public void setMake(Make make) {
+      this.make = make;
     }
 
-    public String getModel()
-    {
-        return model;
+    public String getModelName() {
+      return modelName;
     }
 
-    public void setModel(String model)
-    {
-        this.model = model;
-    } 
-    
+    public void setModelName(String modelName) {
+      this.modelName = modelName;
+    }
 }

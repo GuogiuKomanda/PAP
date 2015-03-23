@@ -12,20 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class MakeService
-{
-    @Autowired
-    private MakeRepository makeRepository;
+public class MakeService {
+  @Autowired
+  private MakeRepository makeRepository;
 
-    public List<Make> findAll()
-    {
-        return makeRepository.findAll();
-    }
+  public List<Make> findAll() {
+    return makeRepository.findAll();
+  }
 
-    public Make findOne(Long id)
-    {
-        return makeRepository.findOne(id);
-    }
-    
-    
+  public Make findOne(Long id) {
+    return makeRepository.findOne(id);
+  }
+
+  public Make save(Make make) {
+    return makeRepository.save(make);
+  }
 }

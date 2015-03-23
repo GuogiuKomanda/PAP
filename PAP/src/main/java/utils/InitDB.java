@@ -1,12 +1,19 @@
 package utils;
 
-import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
 
+import lt.pap.model.Engine;
+import lt.pap.model.Make;
+import lt.pap.model.Model;
+import lt.pap.model.ModelEngine;
 import lt.pap.model.Part;
 import lt.pap.model.PartTranslated;
 import lt.pap.model.User;
+import lt.pap.service.EngineService;
+import lt.pap.service.MakeService;
+import lt.pap.service.ModelEngineService;
+import lt.pap.service.ModelService;
 import lt.pap.service.PartService;
 import lt.pap.service.UserService;
 
@@ -26,7 +33,17 @@ public class InitDB {
   @Autowired
   private PartService partService;
 
-
+  @Autowired
+  private MakeService makeService;
+  
+  @Autowired
+  private ModelService modelService;
+  
+  @Autowired
+  private EngineService engineService;
+  
+  @Autowired
+  private ModelEngineService modelEngineService;
   @Test
   public void init() {
 
@@ -72,6 +89,32 @@ public class InitDB {
     part.getTranslated().put("lt", translation);
 
     partService.save(part);
+    
+    Make make = new Make();
+    make.setMakeName("AA");
+    
+    makeService.save(make);
+    
+    Model model = new Model();
+    model.setMake(make);
+    model.setModelName("modelAA");
+    
+    modelService.save(model);
+    
+    Engine engine = new Engine();
+    engine.setCc(1000);
+    engine.setKw(66);
+    engine.setEngine("E66");
+    
+    engineService.save(engine);
+    
+    ModelEngine me = new ModelEngine();
+    me.setEngine(engine);
+    me.setModel(model);
+    me.setFrom(YearMonth.of(2000, 1));
+    me.setTo(YearMonth.of(2008, 12));
+    
+    modelEngineService.save(me);
   }
 
 }
