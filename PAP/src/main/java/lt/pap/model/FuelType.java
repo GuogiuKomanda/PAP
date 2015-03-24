@@ -10,48 +10,38 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "pap", name = "make")
-public class Make implements Serializable {
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 6191341332185060364L;
+@Table(schema = "pap", name = "fueltype")
+public class FuelType implements Serializable
+{
 
     /**
      * 
      */
-    
+    private static final long serialVersionUID = 5940475859168370706L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    
-    @Column(name = "make", nullable = false, length = 40)
-    private String makeName;
-
+    @Column(name = "fuel", nullable = false, length = 40)
+    private String fuel;
     public Long getId()
     {
         return id;
     }
-
     public void setId(Long id)
     {
         this.id = id;
     }
-
-    public String getMakeName() {
-      return makeName;
-    }
-
-    public void setMakeName(String makeName) {
-      this.makeName = makeName;
-    }
-
-    @Override
-    public String toString()
+    public String getFuel()
     {
-        return makeName;
+        return fuel;
     }
+    public void setFuel(String fuel)
+    {
+        this.fuel = fuel;
+    }
+    
+    
     
     
 }

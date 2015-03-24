@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,8 +27,17 @@ public class Engine implements Serializable {
     @Id
     private Long id;
     
+    @Column(name = "enginename", nullable = true, length = 40)
+    private String enginename;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="fueltype_id")
+    private FuelType fueltype;
+    
+    
     @Column(name = "enginecode", nullable = false, length = 40)
     private String enginecode;
+    
     
     @Column(name ="kw", nullable = false)
     private Integer kw;

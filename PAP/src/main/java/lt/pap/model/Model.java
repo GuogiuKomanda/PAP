@@ -1,6 +1,7 @@
 package lt.pap.model;
 
 import java.io.Serializable;
+import java.time.YearMonth;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,12 @@ public class Model implements Serializable {
     
     @Column(name = "model", nullable = false, length = 40)
     private String modelName;
+    
+    @Column(name = "from_year", nullable = false)
+    private YearMonth from;
+
+    @Column(name = "to_year", nullable = false)
+    private YearMonth to;
 
     public Long getId() {
       return id;
@@ -52,5 +59,25 @@ public class Model implements Serializable {
 
     public void setModelName(String modelName) {
       this.modelName = modelName;
+    }
+
+    public YearMonth getFrom()
+    {
+        return from;
+    }
+
+    public void setFrom(YearMonth from)
+    {
+        this.from = from;
+    }
+
+    public YearMonth getTo()
+    {
+        return to;
+    }
+
+    public void setTo(YearMonth to)
+    {
+        this.to = to;
     }
 }

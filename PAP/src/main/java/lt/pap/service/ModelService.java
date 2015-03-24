@@ -3,7 +3,6 @@ package lt.pap.service;
 import java.util.List;
 
 import lt.pap.dao.ModelRepository;
-import lt.pap.model.Make;
 import lt.pap.model.Model;
 
 import org.springframework.beans.factory.annotation.Autowired;

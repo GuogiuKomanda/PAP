@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<rich:extendedDataTable value="#{uzsakymasListBean.dataModel}"
+		var="uzsakymas" id="uzsakymasListTable" style="height:50%;"
+		selectionMode="single" selection="#{uzsakymasListBean.selection}">
+
+		<a4j:ajax event="selectionchange"
+			listener="#{uzsakymasListBean.selectionListener}"
+			render="uzsakymoEiluteListTable" />
+
+		<f:facet name="header">
+			<h:outputText value="Užsakymai" />
+		</f:facet>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Dokumentas" />
+			</f:facet>
+			<h:outputText value="#{uzsakymas.pavadinimas}"
+				id="uzsakymasPavadinimas" />
+		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Užsakymo data" />
+			</f:facet>
+			<h:outputText value="#{uzsakymas.uzsakymoDataString}" />
+		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Atvykimo data" />
+			</f:facet>
+			<h:outputText value="#{uzsakymas.atvykimoDataString}" />
+		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Tiekejas" />
+			</f:facet>
+			<h:outputText value="#{uzsakymas.tiekejasString}" />
+		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Pirkimo Vadybininkas" />
+			</f:facet>
+			<h:outputText value="#{uzsakymas.pirkimoVadybininkasString}" />
+		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Suma" />
+			</f:facet>
+			<h:outputText value="#{uzsakymas.suma}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Netto" />
+			</f:facet>
+			<h:outputText value="#{uzsakymas.netto}" />
+		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Redagavimas" />
+			</f:facet>
+			<a4j:region>
+				<a4j:commandLink ajaxSingle="true" id="editUzsakymasLink" oncomplete="#{rich:component('editUzsakymasPanel')}.show()" action="#{uzsakymasListBean.actEdit}" render="editUzsakymasPanel" rendered="#{uzsakymas.add}">
+					<h:graphicImage value="/images/icons/edit.gif" style="border:0" />
+					<f:setPropertyActionListener value="#{uzsakymas}" target="#{uzsakymasListBean.currentItem}" />
+				</a4j:commandLink>
+
+				<a4j:commandLink ajaxSingle="true" id="deleteUzsakymasLink" oncomplete="#{rich:component('deleteUzsakymasPanel')}.show()" action="#{uzsakymasListBean.actEdit}" rendered="#{uzsakymas.delete}"
+					render="deleteUzsakymasPanel">
+					<h:graphicImage value="/images/icons/delete.gif" style="border:0" />
+					<f:setPropertyActionListener value="#{uzsakymas}" target="#{uzsakymasListBean.currentItem}" />
+				</a4j:commandLink>
+			</a4j:region>
+
+		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Veiksmai" />
+			</f:facet>
+			<a4j:region>
+				<a4j:commandLink ajaxSingle="true" id="printUzsakymasLink" rendered="#{uzsakymas.print}" oncomplete="window.open('/CraftUzsakymoModulis/faces/printUzsakymas.xhtml','_blank')" value="Spausdinti">
+					<f:setPropertyActionListener value="#{uzsakymas}" target="#{uzsakymasListBean.currentItem}" />
+				</a4j:commandLink>
+				<h:outputText value="  "></h:outputText>
+            	<a4j:commandLink ajaxSingle="true" value="Patvirtinti" render="uzsakymasListTable,uzsakymoEiluteListTable" action="#{uzsakymasListBean.actPatvirtinti}" execute="@form" rendered="#{uzsakymas.confirm}">
+            		<f:setPropertyActionListener value="#{uzsakymas}" target="#{uzsakymasListBean.currentItem}" />
+            	</a4j:commandLink>
+   			</a4j:region>
+		</rich:column>
+		
+	</rich:extendedDataTable>
+
+	<rich:popupPanel header="Redaguoti užsakymą" id="editUzsakymasPanel" domElementAttachment="parent" width="650" height="200">
+		<h:panelGrid columns="3">
+			<h:outputText value="Pavadinimas" />
+			<h:inputText value="#{uzsakymasListBean.edit.pavadinimas}" />
+			<h:panelGroup />
+			
+			<h:outputText value="Užsakymo data" />
+		    <rich:calendar value="#{uzsakymasListBean.edit.uzsakymoData}" locale="LT" popup="true" datePattern="yyyy-MM-dd" showApplyButton="true" 
+		    	cellWidth="24px" cellHeight="22px" style="width:200px">
+            </rich:calendar>
+            <h:panelGroup />
+            			
+            <h:outputText value="Atvykimo data" />
+		    <rich:calendar id="atvykimoDataCalendar" value="#{uzsakymasListBean.edit.atvykimoData}" locale="LT" popup="true" datePattern="yyyy-MM-dd" showApplyButton="true" 
+		    	cellWidth="24px" cellHeight="22px" style="width:200px">
+		    	<f:validator validatorId="todayOrLater" />
+            </rich:calendar>
+            <rich:message for="atvykimoDataCalendar" />
+            
+			<h:outputText value="Pirkimo vadybininkas" />
+			<rich:select value="#{uzsakymasListBean.edit.pirkimoVadybininkas}" converter="vadybininkasConverter">
+				<f:selectItems value="#{vadybininkasManager.pirkimoVadybininkasList}" />
+			</rich:select>
+			<h:panelGroup />
+			
+			<h:outputText value="Tiekėjas" />
+			<rich:select value="#{uzsakymasListBean.edit.tiekejas}" converter="subjektasConverter">
+				<f:selectItems value="#{subjektasManager.tiekejasList}" />
+			</rich:select>
+			<h:panelGroup />
+		</h:panelGrid>
+		<a4j:commandButton value="Patvirtinti" action="#{uzsakymasListBean.store}" render="uzsakymasListTable,uzsakymoEiluteListTable" execute="editUzsakymasPanel"
+			oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editUzsakymasPanel')}.hide();}" />
+		<a4j:commandButton value="Atšaukti" onclick="#{rich:component('editUzsakymasPanel')}.hide(); return false;" />
+	</rich:popupPanel>
+
+	<a4j:jsFunction name="removeUzsakymas" action="#{uzsakymasListBean.delete}" render="uzsakymasListTable,uzsakymoEiluteListTable" execute="@this" oncomplete="#{rich:component('deleteUzsakymasPanel')}.hide();" />
+
+	<rich:popupPanel id="deleteUzsakymasPanel" autosized="true" header="Ištrinti užsakymą?">
+		<h:panelGrid columns="3">
+			<h:outputText value="Užsakymo pavadinimas:" />
+			<h:outputText value="#{uzsakymasListBean.edit.pavadinimas}" />
+			<h:panelGroup />
+		</h:panelGrid>
+		<a4j:commandButton value="Atšaukti" onclick="#{rich:component('deleteUzsakymasPanel')}.hide(); return false;" />
+		<a4j:commandButton value="Ištrinti" onclick="removeUzsakymas(); return false;" />
+	</rich:popupPanel>
+
+	<rich:extendedDataTable value="#{uzsakymoEiluteListBean.dataModel}"
+		var="uzsakymoEilute" id="uzsakymoEiluteListTable" style="height:50%;"
+		selectionMode="single" selection="#{uzsakymoEiluteListBean.selection}">
+
+		<a4j:ajax event="selectionchange"
+			listener="#{uzsakymoEiluteListBean.selectionListener}" />
+
+		<f:facet name="header">
+			<h:outputText value="Prekės" />
+		</f:facet>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Prekės Numeris" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.prekesNumeris}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Pavadinimas" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.prekesPavadinimas}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Kiekis" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.kiekis}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Kaina" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.kaina}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Suma" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.sumaString}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Netto" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.nettoString}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Pardavimo Vadybininkas" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.pardavimoVadybininkasString}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Klientas" />
+			</f:facet>
+			<h:outputText value="#{uzsakymoEilute.klientasString}" />
+		</rich:column>		
+
+		<rich:column rendered="#{uzsakymasListBean.selectionItem.confirm}">
+			<f:facet name="header">
+				<h:outputText value="Redagavimas" />
+			</f:facet>
+			<a4j:region>
+				<a4j:commandLink ajaxSingle="true" id="editUzsakymoEilutelink" oncomplete="#{rich:component('editUzsakymoEilutePanel')}.show()" action="#{uzsakymoEiluteListBean.actEdit}" render="editUzsakymoEilutePanel">
+					<h:graphicImage value="/images/icons/edit.gif" style="border:0" />
+					<f:setPropertyActionListener value="#{uzsakymoEilute}" target="#{uzsakymoEiluteListBean.currentItem}" />
+				</a4j:commandLink>
+
+				<a4j:commandLink ajaxSingle="true" id="deleteUzsakymoEilutelink" oncomplete="#{rich:component('deleteUzsakymoEilutePanel')}.show()" action="#{uzsakymoEiluteListBean.actEdit}" rendered="#{not empty uzsakymoEilute.id}" render="deleteUzsakymoEilutePanel">
+					<h:graphicImage value="/images/icons/delete.gif" style="border:0" />
+					<f:setPropertyActionListener value="#{uzsakymoEilute}" target="#{uzsakymoEiluteListBean.currentItem}" />
+				</a4j:commandLink>
+			</a4j:region>
+		</rich:column>
+	</rich:extendedDataTable>
+
+	<rich:popupPanel id="editUzsakymoEilutePanel" header="Redaguoti užsakymo eilutę" domElementAttachment="parent" autosized="true">
+		<h:panelGrid id="editUzsakymoEilutePanelGrid" columns="3" rendered="#{not empty uzsakymoEiluteListBean.edit}">
+			<h:outputText value="Prekės Numeris" />
+			<rich:select enableManualInput="true" defaultLabel="Pradėkite vesti numerį"	value="#{uzsakymoEiluteListBean.edit.prekesNumeris}">
+				<f:selectItems value="#{prekeManager.getPrekesNumerisList()}" />
+				<a4j:ajax event="selectitem" execute="@this" listener="#{uzsakymoEiluteListBean.prekesNumerisChangeListener}" render="editUzsakymoEilutePanelGrid"/>
+			</rich:select>
+			<h:panelGroup />
+			
+			<h:outputText value="Prekės Pavadinimas" />
+			<h:outputText value="#{uzsakymoEiluteListBean.edit.prekesPavadinimas}" />
+			<h:panelGroup />
+			
+			<h:outputText value="Kiekis" />
+			<rich:inplaceInput id="uzsakymoEiluteKiekis" value="#{uzsakymoEiluteListBean.edit.kiekis}" editEvent="click" converterMessage="Ne skaičius!">
+				<a4j:ajax event="blur" render="editUzsakymoEilutePanelGrid" />
+				<f:validator validatorId="moreThanZero" />
+			</rich:inplaceInput>
+			<rich:message for="uzsakymoEiluteKiekis"/>
+			
+			<h:outputText value="Vieneto Kaina" />
+			<rich:inplaceInput id="uzsakymoEiluteVienetoKaina" value="#{uzsakymoEiluteListBean.edit.kaina}" editEvent="click" converterMessage="Ne skaičius!">
+				<a4j:ajax event="blur" render="editUzsakymoEilutePanelGrid" />
+				<f:validator validatorId="moreThanZero" />
+			</rich:inplaceInput>
+			<rich:message for="uzsakymoEiluteVienetoKaina"/>
+			
+			<h:outputText value="Suma" />
+			<h:outputText value="#{uzsakymoEiluteListBean.edit.sumaString}" />
+			<h:panelGroup />
+			
+			<h:outputText value="Vieneto Svoris" />
+			<h:outputText value="#{uzsakymoEiluteListBean.edit.prekesSvoris}" />
+			<h:panelGroup />
+			
+			<h:outputText value="Netto" />
+			<h:outputText value="#{uzsakymoEiluteListBean.edit.nettoString}" />
+			<h:panelGroup />			
+			
+			<h:outputText value="Grupės Pavadinimas" />
+			<h:outputText value="#{uzsakymoEiluteListBean.edit.prekesGrupesPavadinimas}" />
+			<h:panelGroup />
+			
+			<h:outputText value="Pardavimo vadybininkas" />
+			<rich:select value="#{uzsakymoEiluteListBean.edit.pardavimoVadybininkas}" converter="vadybininkasConverter">
+				<f:selectItems value="#{vadybininkasManager.pardavimoVadybininkasList}" />
+			</rich:select>
+			<h:panelGroup />
+			
+			<h:outputText value="Klientas" />
+			<rich:select value="#{uzsakymoEiluteListBean.edit.klientas}" converter="subjektasConverter">
+				<f:selectItems value="#{subjektasManager.klientasList}" />
+			</rich:select>
+			<h:panelGroup />
+			
+		</h:panelGrid>
+		<a4j:commandButton value="Patvirtinti" action="#{uzsakymoEiluteListBean.store}" render="uzsakymasListTable,uzsakymoEiluteListTable" execute="editUzsakymoEilutePanel"
+			oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editUzsakymoEilutePanel')}.hide();}" />
+		<a4j:commandButton value="Atšaukti" onclick="#{rich:component('editUzsakymoEilutePanel')}.hide(); return false;" />
+	</rich:popupPanel>
+
+	<a4j:jsFunction name="removeUzsakymoEilute" action="#{uzsakymoEiluteListBean.delete}" render="uzsakymasListTable,uzsakymoEiluteListTable" execute="@this" oncomplete="#{rich:component('deleteUzsakymoEilutePanel')}.hide();" />
+
+	<rich:popupPanel id="deleteUzsakymoEilutePanel" autosized="true" header="Ištrinti užsakymo eilutę?">
+		<h:panelGrid columns="3" rendered="#{not empty uzsakymoEiluteListBean.edit}">
+			<h:outputText value="Prekės Numeris" />
+			<h:outputText value="#{uzsakymoEiluteListBean.edit.prekesNumeris}" />
+			<h:panelGroup />
+		</h:panelGrid>
+		<a4j:commandButton value="Atšaukti" onclick="#{rich:component('deleteUzsakymoEilutePanel')}.hide(); return false;" />
+		<a4j:commandButton value="Ištrinti" onclick="removeUzsakymoEilute(); return false;" />
+	</rich:popupPanel>
+
+</ui:composition>

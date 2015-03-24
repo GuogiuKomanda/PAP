@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+<h:head>
+	<link href="#{facesContext.externalContext.requestContextPath}/css/custom.css" type="text/css" rel="stylesheet" />
+	<style type="text/css">
+@media print {
+	.rf-edt-tbl-cntrls {
+		display: none !important;
+	}
+	.rf-edt-tbl-hdr {
+		display: none !important;
+	}
+}
+</style>
+</h:head>
+<h:body>
+	<h:form>
+
+		<h:outputText value="Prekių sąrašas " />
+
+		<rich:extendedDataTable value="#{prekePrintBean.prekes}" var="preke">
+			<f:facet name="controls">
+				<a4j:commandLink value="Spausdinti" onclick="window.print();" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Prekės Numeris" />
+				</f:facet>
+				<h:outputText value="#{preke.numeris}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Pavadinimas" />
+				</f:facet>
+				<h:outputText value="#{preke.pavadinimas}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Svoris" />
+				</f:facet>
+				<h:outputText value="#{preke.svorisString}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Grupės Pavadinimas" />
+				</f:facet>
+				<h:outputText value="#{preke.grupesPavadinimas}" />
+			</rich:column>
+
+		</rich:extendedDataTable>
+	</h:form>
+</h:body>
+</html>

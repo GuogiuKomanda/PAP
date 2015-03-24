@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+<h:head>
+	<link href="#{facesContext.externalContext.requestContextPath}/css/custom.css" type="text/css" rel="stylesheet" />
+	<style type="text/css">
+@media print {
+	.rf-edt-tbl-cntrls {
+		display: none !important;
+	}
+	.rf-edt-tbl-hdr {
+		display: none !important;
+	}
+}
+</style>
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="UŽSAKYMO NR. " />
+			<h:outputText value="#{uzsakymasPrintBean.uzsakymas.pavadinimas}" />
+		</h:panelGrid>
+
+		<h:panelGrid columns="4">
+			<h:outputText value="Užsakovas: CRAFT Bearings" />
+			<h:outputText value="Tiekėjas:" />
+			<h:panelGroup />
+			<h:outputText value="#{uzsakymasPrintBean.uzsakymas.tiekejas.pavadinimas}" />
+		</h:panelGrid>
+
+		<rich:extendedDataTable value="#{uzsakymasPrintBean.uzsakymoEilutes}" var="uzsakymoEilute">
+			<f:facet name="header">
+				<h:outputText value="Užsakymas spausdinimui" style="padding:5px;" />
+			</f:facet>
+			<f:facet name="controls">
+				<a4j:commandLink value="Spausdinti" onclick="window.print();" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Prekės Numeris" />
+				</f:facet>
+				<h:outputText value="#{uzsakymoEilute.prekesNumeris}" />
+				<f:facet name="footer">
+					<h:outputText value="VISO:" />
+				</f:facet>
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Pavadinimas" />
+				</f:facet>
+				<h:outputText value="#{uzsakymoEilute.prekesPavadinimas}" />
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Kiekis" />
+				</f:facet>
+				<h:outputText value="#{uzsakymoEilute.kiekis}" />
+				<f:facet name="footer">
+					<h:outputText value="#{uzsakymasPrintBean.kiekis}" />
+				</f:facet>
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Suma" />
+				</f:facet>
+				<h:outputText value="#{uzsakymoEilute.suma}" />
+				<f:facet name="footer">
+					<h:outputText value="#{uzsakymasPrintBean.suma}">
+						<f:convertNumber pattern="#.##" />
+					</h:outputText>
+					<h:outputText value=" USD"/>
+				</f:facet>
+			</rich:column>
+
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Netto" />
+				</f:facet>
+				<h:outputText value="#{uzsakymoEilute.netto}" />
+				<f:facet name="footer">
+					<h:outputText value="#{uzsakymasPrintBean.netto}">
+						<f:convertNumber pattern="#.###" />
+					</h:outputText>
+					<h:outputText value=" KG"/>
+				</f:facet>
+			</rich:column>
+
+		</rich:extendedDataTable>
+	</h:form>
+</h:body>
+</html>

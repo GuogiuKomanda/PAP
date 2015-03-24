@@ -4,6 +4,7 @@ import java.time.Month;
 import java.time.YearMonth;
 
 import lt.pap.model.Engine;
+import lt.pap.model.FuelType;
 import lt.pap.model.Make;
 import lt.pap.model.Model;
 import lt.pap.model.ModelEngine;
@@ -11,6 +12,7 @@ import lt.pap.model.Part;
 import lt.pap.model.PartTranslated;
 import lt.pap.model.User;
 import lt.pap.service.EngineService;
+import lt.pap.service.FuelTypeService;
 import lt.pap.service.MakeService;
 import lt.pap.service.ModelEngineService;
 import lt.pap.service.ModelService;
@@ -44,6 +46,10 @@ public class InitDB {
   
   @Autowired
   private ModelEngineService modelEngineService;
+  
+  @Autowired
+  private FuelTypeService fuelTypeService;
+  
   @Test
   public void init() {
 
@@ -95,9 +101,21 @@ public class InitDB {
     
     makeService.save(make);
     
+    make = new Make();
+    make.setMakeName("AB");
+    
+    makeService.save(make);
+    
+    make = new Make();
+    make.setMakeName("BB");
+    
+    makeService.save(make);
+    
     Model model = new Model();
     model.setMake(make);
     model.setModelName("modelAA");
+    model.setFrom(YearMonth.of(2001, 01));
+    model.setTo(YearMonth.of(2001, 02));
     
     modelService.save(model);
     
@@ -115,6 +133,11 @@ public class InitDB {
     me.setTo(YearMonth.of(2008, 12));
     
     modelEngineService.save(me);
+    
+    FuelType fuel = new FuelType();
+    fuel.setFuel("AA");
+    
+    fuelTypeService.save(fuel);
   }
 
 }

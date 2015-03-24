@@ -1,0 +1,6 @@
+.ui-layout-pane {
+	padding:	10px;
+	background:	#FFF;
+	border:		1px solid #BBB;
+	overflow:	auto;
+}

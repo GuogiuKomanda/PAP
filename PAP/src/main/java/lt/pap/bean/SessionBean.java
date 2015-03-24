@@ -37,6 +37,7 @@ public class SessionBean implements Serializable {
     supportedLocales = new LinkedHashMap<String, Locale>();
     supportedLocales.put("English", Locale.ENGLISH);
     supportedLocales.put("Lietuvi\u0173", new Locale("lt"));
+    supportedLocales.put("Latvian", new Locale("lv"));
 
     localeString = Locale.ENGLISH.getLanguage();
   }
