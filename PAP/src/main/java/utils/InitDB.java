@@ -96,29 +96,36 @@ public class InitDB {
 
     partService.save(part);
     
-    Make make = new Make();
-    make.setMakeName("AA");
+    Make makeAA = new Make();
+    makeAA.setMakeName("AA");
     
-    makeService.save(make);
+    makeService.save(makeAA);
     
-    make = new Make();
-    make.setMakeName("AB");
+    Make makeAB = new Make();
+    makeAB.setMakeName("AB");
     
-    makeService.save(make);
+    makeService.save(makeAB);
     
-    make = new Make();
-    make.setMakeName("BB");
+    Make makeBB = new Make();
+    makeBB.setMakeName("BB");
     
-    makeService.save(make);
+    makeService.save(makeBB);
     
-    Model model = new Model();
-    model.setMake(make);
-    model.setModelName("modelAA");
-    model.setFrom(YearMonth.of(2001, 01));
-    model.setTo(YearMonth.of(2001, 02));
+    Model modelAA = new Model();
+    modelAA.setMake(makeAA);
+    modelAA.setModelName("modelAA");
+    modelAA.setFrom(YearMonth.of(2001, 01));
+    modelAA.setTo(YearMonth.of(2001, 02));
     
-    modelService.save(model);
+    modelService.save(modelAA);
     
+    Model modelBB = new Model();
+    modelBB.setMake(makeBB);
+    modelBB.setModelName("modelBB");
+    modelBB.setFrom(YearMonth.of(2007, 01));
+    modelBB.setTo(YearMonth.of(2007, 02));
+    
+    modelService.save(modelBB);
     Engine engine = new Engine();
     engine.setCc(1000);
     engine.setKw(66);
@@ -128,7 +135,7 @@ public class InitDB {
     
     ModelEngine me = new ModelEngine();
     me.setEngine(engine);
-    me.setModel(model);
+    me.setModel(modelAA);
     me.setFrom(YearMonth.of(2000, 1));
     me.setTo(YearMonth.of(2008, 12));
     

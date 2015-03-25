@@ -28,7 +28,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"lt.pap.dao"})
-@ComponentScan(basePackages = {"lt.pap.dao", "lt.pap.service", "lt.pap.bean","lt.pap.filter"})
+@ComponentScan(basePackages = {"lt.pap.dao", "lt.pap.service", "lt.pap.bean","lt.pap.filter", "lt.pap.converter"})
 @PropertySource("classpath:application.properties")
 public class SpringDataConfig {
 

@@ -16,8 +16,9 @@
               <h:outputText value="Model:" />
 			  <h:outputText value="Fuel type" />
 			  
-			   <rich:select  enableManualInput="true" defaultLabel="start typing for select1">
-                <f:selectItems value="#{naujasBean.availableMakeList}" />
+			 <rich:select  enableManualInput="true" defaultLabel="start typing for select1" value="#{naujasBean.selectedMake}" converter="#{makeConverter}">
+                <f:selectItems value="#{naujasBean.availableMakeList}"/>
+                <a4j:ajax listener="#{naujasBean.updateModelList}" event="selectitem" render="panel"/>
             </rich:select>
 			  <rich:select enableManualInput="true" defaultLabel="start typing for select2">
                 <f:selectItems value="#{naujasBean.availableModelList}" />

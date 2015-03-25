@@ -80,4 +80,10 @@ public class Model implements Serializable {
     {
         this.to = to;
     }
+    
+    @Override
+    public String toString()
+    {
+        return modelName;
+    }
 }

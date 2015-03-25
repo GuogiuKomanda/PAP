@@ -36,11 +36,19 @@ public class NaujasBean
     
     private FuelType selectedFuelType;
     
-   private List<Make> availableFuelTypeList;
+   private List<FuelType> availableFuelTypeList;
     
     @PostConstruct
     private void init() {
         availableMakeList = makeService.findAll();
+        availableModelList = modelService.findAll();
+        availableFuelTypeList = fueltypeService.findAll();
+        
+        selectedMake = availableMakeList.get(2);
+    }
+    
+    public void updateModelList() {
+        availableModelList = modelService.findByMakeId(selectedMake.getId());
     }
 
     public Make getSelectedMake()
@@ -83,36 +91,6 @@ public class NaujasBean
         this.availableModelList = availableModelList;
     }
 
-    public ModelService getModelService()
-    {
-        return modelService;
-    }
-
-    public void setModelService(ModelService modelService)
-    {
-        this.modelService = modelService;
-    }
-
-    public MakeService getMakeService()
-    {
-        return makeService;
-    }
-
-    public void setMakeService(MakeService makeService)
-    {
-        this.makeService = makeService;
-    }
-
-    public FuelTypeService getFueltypeService()
-    {
-        return fueltypeService;
-    }
-
-    public void setFueltypeService(FuelTypeService fueltypeService)
-    {
-        this.fueltypeService = fueltypeService;
-    }
-
     public FuelType getSelectedFuelType()
     {
         return selectedFuelType;
@@ -123,15 +101,17 @@ public class NaujasBean
         this.selectedFuelType = selectedFuelType;
     }
 
-    public List<Make> getAvailableFuelTypeList()
+    public List<FuelType> getAvailableFuelTypeList()
     {
         return availableFuelTypeList;
     }
 
-    public void setAvailableFuelTypeList(List<Make> availableFuelTypeList)
+    public void setAvailableFuelTypeList(List<FuelType> availableFuelTypeList)
     {
         this.availableFuelTypeList = availableFuelTypeList;
     }
+
+
 
 
     
