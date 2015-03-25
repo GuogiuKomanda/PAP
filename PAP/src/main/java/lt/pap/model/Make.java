@@ -52,6 +52,17 @@ public class Make implements Serializable {
     {
         return makeName;
     }
+
+    @Override
+    public int hashCode() {
+      return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      return (obj != null && obj instanceof Make && ((Make) obj).getId().equals(getId()));
+    }
+    
     
     
 }
