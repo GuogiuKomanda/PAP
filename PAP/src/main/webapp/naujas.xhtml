@@ -10,17 +10,22 @@
 <h:head/>
 
 <h:form>
+
     <h:panelGrid id="panel" columns="3" cellpadding="0">
 
               <h:outputText value="Make" />
-              <h:outputText value="Model:" />
+              <h:outputText value="Model" />
 			  <h:outputText value="Fuel type" />
-			  
-			 <rich:select  enableManualInput="true" defaultLabel="start typing for select1" value="#{naujasBean.selectedMake}" converter="#{makeConverter}">
-                <f:selectItems value="#{naujasBean.availableMakeList}"/>
-                <a4j:ajax listener="#{naujasBean.updateModelList}" event="selectitem" render="panel"/>
-            </rich:select>
-			  <rich:select enableManualInput="true" defaultLabel="start typing for select2">
+
+			<h:form>
+				 <rich:select id="makeSelect" enableManualInput="true" defaultLabel="start typing for select1" value="#{naujasBean.selectedMake}" converter="#{makeConverter}" >
+	                <f:selectItems value="#{naujasBean.availableMakeList}"/>
+	   				<a4j:ajax event="selectitem" render="modelSelect" listener="#{naujasBean.updateModelList}"/>
+	            </rich:select>
+	            
+	            <rich:message></rich:message>
+            </h:form>
+			  <rich:select id="modelSelect" enableManualInput="true" defaultLabel="start typing for select2">
                 <f:selectItems value="#{naujasBean.availableModelList}" />
             </rich:select>
 			<rich:select enableManualInput="true" defaultLabel="start typing for select3">

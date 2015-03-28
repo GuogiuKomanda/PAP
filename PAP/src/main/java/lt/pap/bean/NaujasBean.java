@@ -17,102 +17,87 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
-public class NaujasBean
-{
-    @Autowired
-    private MakeService makeService;
-    
-    private Make selectedMake;
-    
-    private List<Make> availableMakeList;
-    @Autowired
-    private ModelService modelService;
-    
-    private Model selectedModel;
-    
-    private List<Model> availableModelList;
-    @Autowired
-    private FuelTypeService fueltypeService;
-    
-    private FuelType selectedFuelType;
-    
-   private List<FuelType> availableFuelTypeList;
-    
-    @PostConstruct
-    private void init() {
-        availableMakeList = makeService.findAll();
-        availableModelList = modelService.findAll();
-        availableFuelTypeList = fueltypeService.findAll();
-        
-        selectedMake = availableMakeList.get(2);
-    }
-    
-    public void updateModelList() {
-        availableModelList = modelService.findByMakeId(selectedMake.getId());
-    }
+public class NaujasBean {
+  @Autowired
+  private MakeService makeService;
 
-    public Make getSelectedMake()
-    {
-        return selectedMake;
-    }
+  @Autowired
+  private ModelService modelService;
 
-    public void setSelectedMake(Make selectedMake)
-    {
-        this.selectedMake = selectedMake;
-    }
+  @Autowired
+  private FuelTypeService fueltypeService;
 
-    public List<Make> getAvailableMakeList()
-    {
-        return availableMakeList;
-    }
+  private Make selectedMake;
 
-    public void setAvailableMakeList(List<Make> availableMakeList)
-    {
-        this.availableMakeList = availableMakeList;
-    }
+  private Model selectedModel;
 
-    public Model getSelectedModel()
-    {
-        return selectedModel;
-    }
+  private FuelType selectedFuelType;
 
-    public void setSelectedModel(Model selectedModel)
-    {
-        this.selectedModel = selectedModel;
-    }
+  private List<Make> availableMakeList;
 
-    public List<Model> getAvailableModelList()
-    {
-        return availableModelList;
-    }
+  private List<Model> availableModelList;
 
-    public void setAvailableModelList(List<Model> availableModelList)
-    {
-        this.availableModelList = availableModelList;
-    }
+  private List<FuelType> availableFuelTypeList;
 
-    public FuelType getSelectedFuelType()
-    {
-        return selectedFuelType;
-    }
+  @PostConstruct
+  private void init() {
+    availableMakeList = makeService.findAll();
+    availableModelList = modelService.findAll();
+    availableFuelTypeList = fueltypeService.findAll();
 
-    public void setSelectedFuelType(FuelType selectedFuelType)
-    {
-        this.selectedFuelType = selectedFuelType;
-    }
+    // selectedMake = availableMakeList.get(2);
+  }
 
-    public List<FuelType> getAvailableFuelTypeList()
-    {
-        return availableFuelTypeList;
-    }
+  public void updateModelList() {
+    if(selectedMake!= null)
+      availableModelList = modelService.findByMakeId(selectedMake.getId());
+  }
+  
+  public List<Make> getAvailableMakeList() {
+    return availableMakeList;
+  }
 
-    public void setAvailableFuelTypeList(List<FuelType> availableFuelTypeList)
-    {
-        this.availableFuelTypeList = availableFuelTypeList;
-    }
+  public void setAvailableMakeList(List<Make> availableMakeList) {
+    this.availableMakeList = availableMakeList;
+  }
 
+  public List<Model> getAvailableModelList() {
+    return availableModelList;
+  }
 
+  public void setAvailableModelList(List<Model> availableModelList) {
+    this.availableModelList = availableModelList;
+  }
 
+  public List<FuelType> getAvailableFuelTypeList() {
+    return availableFuelTypeList;
+  }
 
-    
+  public void setAvailableFuelTypeList(List<FuelType> availableFuelTypeList) {
+    this.availableFuelTypeList = availableFuelTypeList;
+  }
+
+  public Make getSelectedMake() {
+    return selectedMake;
+  }
+
+  public void setSelectedMake(Make selectedMake) {
+    this.selectedMake = selectedMake;
+  }
+
+  public Model getSelectedModel() {
+    return selectedModel;
+  }
+
+  public void setSelectedModel(Model selectedModel) {
+    this.selectedModel = selectedModel;
+  }
+
+  public FuelType getSelectedFuelType() {
+    return selectedFuelType;
+  }
+
+  public void setSelectedFuelType(FuelType selectedFuelType) {
+    this.selectedFuelType = selectedFuelType;
+  }
 }
