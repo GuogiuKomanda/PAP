@@ -27,10 +27,7 @@ public class ModelService {
     return modelRepository.save(model);
   }
 
-public List<Model> findByMakeId(Long id)
-{
-    return modelRepository.findByMakeId(id);
-}
+
   
   
 }

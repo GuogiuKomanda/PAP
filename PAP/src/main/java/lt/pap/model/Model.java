@@ -25,8 +25,8 @@ public class Model implements Serializable {
     private Long id;
     
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="make_id")
-    private Make make;
+    @JoinColumn(name="modelgroup_id")
+    private ModelGroup modelgroup;
     
     @Column(name = "model", nullable = false, length = 40)
     private String modelName;
@@ -37,28 +37,34 @@ public class Model implements Serializable {
     @Column(name = "to_year", nullable = false)
     private YearMonth to;
 
-    public Long getId() {
-      return id;
+    public Long getId()
+    {
+        return id;
     }
 
-    public void setId(Long id) {
-      this.id = id;
+    public void setId(Long id)
+    {
+        this.id = id;
     }
 
-    public Make getMake() {
-      return make;
+    public ModelGroup getModelgroup()
+    {
+        return modelgroup;
     }
 
-    public void setMake(Make make) {
-      this.make = make;
+    public void setModelgroup(ModelGroup modelgroup)
+    {
+        this.modelgroup = modelgroup;
     }
 
-    public String getModelName() {
-      return modelName;
+    public String getModelName()
+    {
+        return modelName;
     }
 
-    public void setModelName(String modelName) {
-      this.modelName = modelName;
+    public void setModelName(String modelName)
+    {
+        this.modelName = modelName;
     }
 
     public YearMonth getFrom()
@@ -80,10 +86,6 @@ public class Model implements Serializable {
     {
         this.to = to;
     }
-    
-    @Override
-    public String toString()
-    {
-        return modelName;
-    }
+
+   
 }
