@@ -1,20 +1,15 @@
 package lt.pap.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "pap", name = "modelgroup")
-public class ModelGroup implements Serializable
+@Table(schema = "pap", name = "model_group")
+public class ModelGroup extends AbstractEntity
 {
     
     /**
@@ -22,45 +17,43 @@ public class ModelGroup implements Serializable
      */
     private static final long serialVersionUID = -1229686035956680422L;
     
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
-    
-    @Column(name = "modelgroup", nullable = false, length = 40)
-    private String modelgroup;   
+    @Column(name = "name", nullable = false, length = 40)
+    private String name;   
    
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="make_id")
     private Make make;
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public String getModelgroup()
-    {
-        return modelgroup;
-    }
-
-    public void setModelgroup(String modelgroup)
-    {
-        this.modelgroup = modelgroup;
-    }
-
-    public Make getMake()
-    {
-        return make;
-    }
-
-    public void setMake(Make make)
-    {
-        this.make = make;
-    }
     
+
+//    @OneToMany(mappedBy="modelGroup")
+//    private List<Model> modelList;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Make getMake() {
+		return make;
+	}
+
+	public void setMake(Make make) {
+		this.make = make;
+	}
+
+//	public List<Model> getModelList() {
+//		return modelList;
+//	}
+//
+//	public void setModelList(List<Model> modelList) {
+//		this.modelList = modelList;
+//	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return (obj != null && obj instanceof ModelGroup && ((ModelGroup) obj).getId().equals(getId()));
+	}
 }

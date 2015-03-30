@@ -1,88 +1,81 @@
 package lt.pap.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(schema = "pap", name = "engine")
-public class Engine implements Serializable {
-    
-  
+public class Engine extends AbstractEntity {
     
     /**
-     * 
-     */
-    private static final long serialVersionUID = -7524265174166547947L;
+	 * 
+	 */
+	private static final long serialVersionUID = 3795065030996976288L;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
-    
-    @Column(name = "enginename", nullable = true, length = 40)
-    private String enginename;
-    
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fueltype_id")
-    private FuelType fueltype;
-    
-    
-    @Column(name = "enginecode", nullable = false, length = 40)
-    private String enginecode;
-    
+	@Column(name = "name", nullable = true, length = 40)
+    private String name;
+   
+    @Column(name = "code", nullable = false, length = 40)
+    private String code;   
     
     @Column(name ="kw", nullable = false)
     private Integer kw;
     
     @Column(name ="cc", nullable = false)
     private Integer cc;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="fuel_type_id")
+    private FuelType fuelType;
 
-    public Long getId()
-    {
-        return id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getEnginecode()
-    {
-        return enginecode;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setEngine(String enginecode)
-    {
-        this.enginecode = enginecode;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public Integer getKw()
-    {
-        return kw;
-    }
+	public Integer getKw() {
+		return kw;
+	}
 
-    public void setKw(Integer kw)
-    {
-        this.kw = kw;
-    }
+	public void setKw(Integer kw) {
+		this.kw = kw;
+	}
 
-    public Integer getCc()
-    {
-        return cc;
-    }
+	public Integer getCc() {
+		return cc;
+	}
 
-    public void setCc(Integer cc)
-    {
-        this.cc = cc;
-    }
+	public void setCc(Integer cc) {
+		this.cc = cc;
+	}
+
+	public FuelType getFuelType() {
+		return fuelType;
+	}
+
+	public void setFuelType(FuelType fuelType) {
+		this.fuelType = fuelType;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	      return (obj != null && obj instanceof Engine && ((Engine) obj).getId().equals(getId()));
+	}
    
+    
 }

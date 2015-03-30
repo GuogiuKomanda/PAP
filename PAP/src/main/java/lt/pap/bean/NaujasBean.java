@@ -3,12 +3,13 @@ package lt.pap.bean;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.model.SelectItem;
 
-import lt.pap.model.FuelType;
 import lt.pap.model.Make;
-import lt.pap.model.Model;
+import lt.pap.model.utils.Functions;
 import lt.pap.service.FuelTypeService;
 import lt.pap.service.MakeService;
+import lt.pap.service.ModelGroupService;
 import lt.pap.service.ModelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,86 +19,100 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("session")
 public class NaujasBean {
-  @Autowired
-  private MakeService makeService;
+	@Autowired
+	private MakeService makeService;
 
-  @Autowired
-  private ModelService modelService;
+	@Autowired
+	private ModelService modelService;
 
-  @Autowired
-  private FuelTypeService fueltypeService;
+	@Autowired
+	private ModelGroupService modelGroupService;
 
-  private Make selectedMake;
+	@Autowired
+	private FuelTypeService fueltypeService;
 
-  private Model selectedModel;
+	// make
+	private String selectedMake;
 
-  private FuelType selectedFuelType;
+	private List<SelectItem> availableMakeList;
 
-  private List<Make> availableMakeList;
+	// model
+	private List<SelectItem> selectedModelList;
 
-  private List<Model> availableModelList;
+	private List<SelectItem> availableModelList;
 
-  private List<FuelType> availableFuelTypeList;
+	// fuel
+	private List<SelectItem> selectedFuelTypeList;
 
-  @PostConstruct
-  private void init() {
-    availableMakeList = makeService.findAll();
-    availableModelList = modelService.findAll();
-    availableFuelTypeList = fueltypeService.findAll();
+	private List<SelectItem> availableFuelTypeList;
 
-    // selectedMake = availableMakeList.get(2);
-  }
+	@PostConstruct
+	private void init() {
+		availableMakeList = Functions.makeToSelectItems(makeService.findAll());
+		availableModelList = Functions.modelToSelectItems(modelService.findAll());
+		availableFuelTypeList = Functions.fuelTypeToSelectItems(fueltypeService.findAll());
 
-  public void updateModelList() {
-    if(selectedMake!= null)
-      availableModelList = modelService.findByMakeId(selectedMake.getId());
-  }
-  
-  public List<Make> getAvailableMakeList() {
-    return availableMakeList;
-  }
+	}
 
-  public void setAvailableMakeList(List<Make> availableMakeList) {
-    this.availableMakeList = availableMakeList;
-  }
+	public void updateModelList() {
+		if (selectedMake != null) {
+			Make mk =  makeService.findOne(Long.parseLong(selectedMake));
+			availableModelList = Functions.modelToSelectItems(modelService.findByModelGroupMakeId(mk.getId()));
+		}
+	}
 
-  public List<Model> getAvailableModelList() {
-    return availableModelList;
-  }
+	public void updateFuelList() {
+		int i = 0;
+		i++;
+	}
 
-  public void setAvailableModelList(List<Model> availableModelList) {
-    this.availableModelList = availableModelList;
-  }
 
-  public List<FuelType> getAvailableFuelTypeList() {
-    return availableFuelTypeList;
-  }
 
-  public void setAvailableFuelTypeList(List<FuelType> availableFuelTypeList) {
-    this.availableFuelTypeList = availableFuelTypeList;
-  }
+	public String getSelectedMake() {
+		return selectedMake;
+	}
 
-  public Make getSelectedMake() {
-    return selectedMake;
-  }
+	public void setSelectedMake(String selectedMake) {
+		this.selectedMake = selectedMake;
+	}
 
-  public void setSelectedMake(Make selectedMake) {
-    this.selectedMake = selectedMake;
-  }
+	public List<SelectItem> getAvailableMakeList() {
+		return availableMakeList;
+	}
 
-  public Model getSelectedModel() {
-    return selectedModel;
-  }
+	public void setAvailableMakeList(List<SelectItem> availableMakeList) {
+		this.availableMakeList = availableMakeList;
+	}
 
-  public void setSelectedModel(Model selectedModel) {
-    this.selectedModel = selectedModel;
-  }
+	public List<SelectItem> getSelectedModelList() {
+		return selectedModelList;
+	}
 
-  public FuelType getSelectedFuelType() {
-    return selectedFuelType;
-  }
+	public void setSelectedModelList(List<SelectItem> selectedModelList) {
+		this.selectedModelList = selectedModelList;
+	}
 
-  public void setSelectedFuelType(FuelType selectedFuelType) {
-    this.selectedFuelType = selectedFuelType;
-  }
+	public List<SelectItem> getAvailableModelList() {
+		return availableModelList;
+	}
+
+	public void setAvailableModelList(List<SelectItem> availableModelList) {
+		this.availableModelList = availableModelList;
+	}
+
+	public List<SelectItem> getSelectedFuelTypeList() {
+		return selectedFuelTypeList;
+	}
+
+	public void setSelectedFuelTypeList(List<SelectItem> selectedFuelTypeList) {
+		this.selectedFuelTypeList = selectedFuelTypeList;
+	}
+
+	public List<SelectItem> getAvailableFuelTypeList() {
+		return availableFuelTypeList;
+	}
+
+	public void setAvailableFuelTypeList(List<SelectItem> availableFuelTypeList) {
+		this.availableFuelTypeList = availableFuelTypeList;
+	}
 }

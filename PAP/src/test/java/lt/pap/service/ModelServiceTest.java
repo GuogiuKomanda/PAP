@@ -27,8 +27,8 @@ public class ModelServiceTest
     @Test
     public void test()
     {
-        List<Model> models = modelService.findByMakeId(1L);
-        assertEquals(1, models.size());
+        List<Model> models = modelService.findByModelGroupId(1L);
+        assertEquals(2, models.size());
     }
     
 }

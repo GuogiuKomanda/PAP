@@ -1,35 +1,28 @@
 package lt.pap.model;
 
-import java.io.Serializable;
 import java.time.YearMonth;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(schema = "pap", name = "model")
-public class Model implements Serializable {
+public class Model extends AbstractEntity {
     
  
     private static final long serialVersionUID = -859643164493403394L;
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
     
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="modelgroup_id")
-    private ModelGroup modelgroup;
+    @Column(name = "name", nullable = false, length = 40)
+    private String name;
     
-    @Column(name = "model", nullable = false, length = 40)
-    private String modelName;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="model_group_id")
+    private ModelGroup modelGroup;
     
     @Column(name = "from_year", nullable = false)
     private YearMonth from;
@@ -37,55 +30,41 @@ public class Model implements Serializable {
     @Column(name = "to_year", nullable = false)
     private YearMonth to;
 
-    public Long getId()
-    {
-        return id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public ModelGroup getModelgroup()
-    {
-        return modelgroup;
-    }
+	public ModelGroup getModelGroup() {
+		return modelGroup;
+	}
 
-    public void setModelgroup(ModelGroup modelgroup)
-    {
-        this.modelgroup = modelgroup;
-    }
+	public void setModelGroup(ModelGroup modelGroup) {
+		this.modelGroup = modelGroup;
+	}
 
-    public String getModelName()
-    {
-        return modelName;
-    }
+	public YearMonth getFrom() {
+		return from;
+	}
 
-    public void setModelName(String modelName)
-    {
-        this.modelName = modelName;
-    }
+	public void setFrom(YearMonth from) {
+		this.from = from;
+	}
 
-    public YearMonth getFrom()
-    {
-        return from;
-    }
+	public YearMonth getTo() {
+		return to;
+	}
 
-    public void setFrom(YearMonth from)
-    {
-        this.from = from;
-    }
+	public void setTo(YearMonth to) {
+		this.to = to;
+	}
 
-    public YearMonth getTo()
-    {
-        return to;
-    }
-
-    public void setTo(YearMonth to)
-    {
-        this.to = to;
-    }
-
-   
+	@Override
+	public boolean equals(Object obj) {
+		return (obj != null && obj instanceof Model && ((Model) obj).getId().equals(getId()));
+	}
+	
 }

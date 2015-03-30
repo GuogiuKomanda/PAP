@@ -1,56 +1,42 @@
 package lt.pap.model;
 
-import java.io.Serializable;
 import java.time.YearMonth;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(schema = "pap", name = "user")
-public class User implements Serializable {
+public class User extends AbstractEntity {
 
-  private static final long serialVersionUID = -5132176331654116607L;
+	private static final long serialVersionUID = -5132176331654116607L;
 
+	@Column(name = "name", nullable = false, length = 40)
+	private String name;
 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Id
-  private Long id;
+	@Column(name = "test_date", nullable = false)
+	private YearMonth date;
 
-  @Column(name = "name", nullable = false, length = 40)
-  private String name;
-  
-  @Column(name = "test_date", nullable = false)
- //@DateTimeFormat(pattern = "yyyy-mm")
-  private YearMonth date;
+	public String getName() {
+		return name;
+	}
 
-  public Long getId() {
-    return id;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	public YearMonth getDate() {
+		return date;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public void setDate(YearMonth date) {
+		this.date = date;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public YearMonth getDate() {
-    return date;
-  }
-
-  public void setDate(YearMonth date) {
-    this.date = date;
-  }
+	@Override
+	public boolean equals(Object obj) {
+		return (obj != null && obj instanceof User && ((User) obj).getId().equals(getId()));
+	}
 
 }

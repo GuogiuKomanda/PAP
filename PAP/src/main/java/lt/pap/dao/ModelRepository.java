@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ModelRepository extends JpaRepository<Model, Long> {
 
-    List<Model> findByModelGroupId(Long id);
-
+	List<Model> findByModelGroupId(Long modelGroupId);
+	
+	List<Model> findByModelGroupMakeId(Long makeId);
 }

@@ -8,6 +8,7 @@ import lt.pap.model.FuelType;
 import lt.pap.model.Make;
 import lt.pap.model.Model;
 import lt.pap.model.ModelEngine;
+import lt.pap.model.ModelGroup;
 import lt.pap.model.Part;
 import lt.pap.model.PartTranslated;
 import lt.pap.model.User;
@@ -15,6 +16,7 @@ import lt.pap.service.EngineService;
 import lt.pap.service.FuelTypeService;
 import lt.pap.service.MakeService;
 import lt.pap.service.ModelEngineService;
+import lt.pap.service.ModelGroupService;
 import lt.pap.service.ModelService;
 import lt.pap.service.PartService;
 import lt.pap.service.UserService;
@@ -40,6 +42,9 @@ public class InitDB {
   
   @Autowired
   private ModelService modelService;
+  
+  @Autowired
+  private ModelGroupService modelGroupService;
   
   @Autowired
   private EngineService engineService;
@@ -97,39 +102,60 @@ public class InitDB {
     partService.save(part);
     
     Make makeAA = new Make();
-    makeAA.setMakeName("AA");
+    makeAA.setName("AA");
     
     makeService.save(makeAA);
     
     Make makeAB = new Make();
-    makeAB.setMakeName("AB");
+    makeAB.setName("AB");
     
     makeService.save(makeAB);
     
     Make makeBB = new Make();
-    makeBB.setMakeName("BB");
+    makeBB.setName("BB");
     
     makeService.save(makeBB);
     
+    ModelGroup mgA = new ModelGroup();
+    mgA.setMake(makeAA);
+    mgA.setName("Group A");
+    
+    modelGroupService.save(mgA);
+    
+    ModelGroup mgB = new ModelGroup();
+    mgB.setMake(makeBB);
+    mgB.setName("Group B");
+    
+    modelGroupService.save(mgB);
+    
     Model modelAA = new Model();
-    modelAA.setMake(makeAA);
-    modelAA.setModelName("modelAA");
+    modelAA.setModelGroup(mgA);
+    modelAA.setName("modelAA");
     modelAA.setFrom(YearMonth.of(2001, 01));
     modelAA.setTo(YearMonth.of(2001, 02));
     
     modelService.save(modelAA);
     
+    Model modelAA2 = new Model();
+    modelAA2.setModelGroup(mgA);
+    modelAA2.setName("modelAA-2");
+    modelAA2.setFrom(YearMonth.of(2007, 01));
+    modelAA2.setTo(YearMonth.of(2007, 02));
+    
+    modelService.save(modelAA2);
+    
     Model modelBB = new Model();
-    modelBB.setMake(makeBB);
-    modelBB.setModelName("modelBB");
+    modelBB.setModelGroup(mgB);
+    modelBB.setName("model BB");
     modelBB.setFrom(YearMonth.of(2007, 01));
     modelBB.setTo(YearMonth.of(2007, 02));
     
     modelService.save(modelBB);
+    
     Engine engine = new Engine();
     engine.setCc(1000);
     engine.setKw(66);
-    engine.setEngine("E66");
+    engine.setName("E66");
     
     engineService.save(engine);
     
@@ -141,10 +167,15 @@ public class InitDB {
     
     modelEngineService.save(me);
     
-    FuelType fuel = new FuelType();
-    fuel.setFuel("AA");
+    FuelType fuelB = new FuelType();
+    fuelB.setName("Benzas");
     
-    fuelTypeService.save(fuel);
+    fuelTypeService.save(fuelB);
+    
+    FuelType fuelD = new FuelType();
+    fuelD.setName("Dyzelis");
+    
+    fuelTypeService.save(fuelD);
   }
 
 }
