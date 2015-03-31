@@ -58,6 +58,8 @@ public class NaujasBean {
 		if (selectedMake != null) {
 			Make mk =  makeService.findOne(Long.parseLong(selectedMake));
 			availableModelList = Functions.modelToSelectItems(modelService.findByModelGroupMakeId(mk.getId()));
+		} else {
+		  availableModelList = Functions.modelToSelectItems(modelService.findAll());
 		}
 	}
 

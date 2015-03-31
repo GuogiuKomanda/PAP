@@ -1,57 +1,63 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-		xmlns:h="http://java.sun.com/jsf/html" 
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:s="http://www.springframework.org/tags"  
-		xmlns:a4j="http://richfaces.org/a4j" 
-		xmlns:rich="http://richfaces.org/rich">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:s="http://www.springframework.org/tags"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
 	<h:outputScript name="jquery.js" />
 	<h:outputScript library="chosen" name="chosen.jquery.js" />
-		<h:outputScript library="chosen" name="chosen.proto.js" />
-	<h:outputStylesheet library="chosen" name="chosen.css"  />
+	<h:outputScript library="chosen" name="chosen.proto.js" />
+	<h:outputStylesheet library="chosen" name="chosen.css" />
 </h:head>
 
+<h:form id="form">
+	<h:panelGrid id="panel" columns="3" cellpadding="0">
 
-<h:panelGrid id="panel" columns="3" cellpadding="0">
+		<h:outputText value="Make" />
+		<h:outputText value="Model" />
+		<h:outputText value="Fuel type" />
 
-              <h:outputText value="Make" />
-              <h:outputText value="Model" />
-			  <h:outputText value="Fuel type" />
-		
-		<h:form>
-			<h:selectOneMenu id="makeSelect" value="#{naujasBean.selectedMake}" 
-					style="width:350px;" styleClass="chosen-select">
+
+		<h:panelGroup id="makePanel">
+			<h:selectOneMenu id="makeSelect" value="#{naujasBean.selectedMake}" style="width:350px;" styleClass="chosen-select">
 				<f:selectItem itemLabel="---" itemValue="#{null}" />
-			    <f:selectItems value="#{naujasBean.availableMakeList}"/>
-   				<a4j:ajax listener="#{naujasBean.updateModelList}" execute="makeSelect" render="panel" onchange="jQuery('#modelSelect').trigger('chosen:updated');"/>
-   				<h:messages/>
+				<f:selectItems value="#{naujasBean.availableMakeList}" />
+				<a4j:ajax listener="#{naujasBean.updateModelList}" execute="makeSelect" render="modelPanel"
+					onchange="jQuery('.chosen').trigger('chosen:updated');" />
+				<h:messages />
 			</h:selectOneMenu>
-		</h:form>
-		
-		<h:form>
-			<h:selectManyListbox id="modelSelect" value="#{naujasBean.selectedModelList}" style="width:350px;" styleClass="chosen-select"
-             		multiple="true" tabindex="6" data-placeholder="Select models">
-   				 <f:selectItems value="#{naujasBean.availableModelList}" />
-   				 <a4j:ajax listener="#{naujasBean.updateFuelList}"/>
-            </h:selectManyListbox>
-        </h:form>
-            
-        <h:form>
-            <h:selectManyListbox id="fuelSelect" value="#{naujasBean.selectedFuelTypeList}" style="width:350px;" styleClass="chosen-select"
-             		multiple="true" tabindex="1" data-placeholder="Select fuel">
-   				 <f:selectItems value="#{naujasBean.availableFuelTypeList}" />
-   				 <a4j:ajax listener="#{naujasBean.updateFuelList}"/>
-            </h:selectManyListbox>
-         </h:form>         
-            <h:outputScript>
-               jQuery(".chosen-select").chosen({});
-            </h:outputScript>
+			<h:outputScript>
+               jQuery("#form\\:makeSelect").chosen({});
+        	</h:outputScript>
+		</h:panelGroup>
 
-</h:panelGrid>
-<h:messages/>
+
+		<h:panelGroup id="modelPanel">
+
+			<h:selectManyListbox id="modelSelect" value="#{naujasBean.selectedModelList}" style="width:350px;"
+				styleClass="chosen-select" multiple="true" tabindex="6" data-placeholder="Select models">
+				<f:selectItems value="#{naujasBean.availableModelList}" />
+				<a4j:ajax listener="#{naujasBean.updateFuelList}" />
+			</h:selectManyListbox>
+
+			<h:outputScript>
+               jQuery("#form\\:modelSelect").chosen({});
+        	</h:outputScript>
+
+		</h:panelGroup>
+
+
+		<h:selectManyListbox id="fuelSelect" value="#{naujasBean.selectedFuelTypeList}" style="width:350px;"
+			styleClass="chosen-select" multiple="true" tabindex="1" data-placeholder="Select fuel">
+			<f:selectItems value="#{naujasBean.availableFuelTypeList}" />
+			<a4j:ajax listener="#{naujasBean.updateFuelList}" />
+		</h:selectManyListbox>
+
+
+
+	</h:panelGrid>
+</h:form>
+<h:messages />
 
 
 
