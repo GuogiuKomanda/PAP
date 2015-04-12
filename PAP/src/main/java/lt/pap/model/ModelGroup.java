@@ -20,7 +20,7 @@ public class ModelGroup extends AbstractEntity
     @Column(name = "name", nullable = false, length = 40)
     private String name;   
    
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="make_id")
     private Make make;
     

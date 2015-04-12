@@ -27,4 +27,8 @@ public class MakeService {
   public Make save(Make make) {
     return makeRepository.save(make);
   }
+  
+  public Make findByName(String name) {
+	    return makeRepository.findByName(name);
+	  }
 }

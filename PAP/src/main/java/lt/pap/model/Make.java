@@ -1,7 +1,12 @@
 package lt.pap.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,12 +21,23 @@ public class Make extends AbstractEntity {
 	@Column(name = "name", nullable = false, length = 40)
 	private String name;
 
+	@OneToMany(mappedBy = "make", fetch=FetchType.EAGER )
+	private List<ModelGroup> modelGroupList = new ArrayList<ModelGroup>();
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<ModelGroup> getModelGroupList() {
+		return modelGroupList;
+	}
+
+	public void setModelGroupList(List<ModelGroup> modelGroupList) {
+		this.modelGroupList = modelGroupList;
 	}
 
 	@Override
