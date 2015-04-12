@@ -153,6 +153,7 @@ public class InitDB {
     modelService.save(modelBB);
     
     Engine engine = new Engine();
+    engine.setCode("ccc");
     engine.setCc(1000);
     engine.setKw(66);
     engine.setName("E66");

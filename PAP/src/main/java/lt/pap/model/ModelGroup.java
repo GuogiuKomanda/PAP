@@ -1,10 +1,14 @@
 package lt.pap.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +29,8 @@ public class ModelGroup extends AbstractEntity
     private Make make;
     
 
-//    @OneToMany(mappedBy="modelGroup")
-//    private List<Model> modelList;
+    @OneToMany(mappedBy="modelGroup", fetch=FetchType.EAGER)
+    private List<Model> modelList = new ArrayList<Model>();
 
 	public String getName() {
 		return name;
@@ -44,13 +48,13 @@ public class ModelGroup extends AbstractEntity
 		this.make = make;
 	}
 
-//	public List<Model> getModelList() {
-//		return modelList;
-//	}
-//
-//	public void setModelList(List<Model> modelList) {
-//		this.modelList = modelList;
-//	}
+	public List<Model> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<Model> modelList) {
+		this.modelList = modelList;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
