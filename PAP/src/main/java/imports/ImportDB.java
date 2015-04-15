@@ -3,6 +3,7 @@ package imports;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -17,6 +18,7 @@ import lt.pap.model.Make;
 import lt.pap.model.Model;
 import lt.pap.model.ModelEngine;
 import lt.pap.model.ModelGroup;
+import lt.pap.model.WPart;
 import lt.pap.service.EngineService;
 import lt.pap.service.FuelTypeService;
 import lt.pap.service.MakeService;
@@ -25,6 +27,7 @@ import lt.pap.service.ModelGroupService;
 import lt.pap.service.ModelService;
 import lt.pap.service.PartService;
 import lt.pap.service.UserService;
+import lt.pap.service.WPartService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +44,11 @@ public class ImportDB {
 
 	private static DateTimeFormatter yearMonthFormatter = DateTimeFormatter
 			.ofPattern("MM.yyyy");
-
+	 
+	@Autowired
+	  private WPartService wPartService;
+	  
+	
 	@Autowired
 	private UserService userService;
 
@@ -74,6 +81,30 @@ public class ImportDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        ModelEngine ME= modelEngineService.findOne(18L);
+        WPart dal1 = new WPart();
+        dal1.setModelEngine(ME);
+        dal1.setYear(Year.of(2014));
+        dal1.setStatus("A1 variklis CAVG");
+        dal1.setFullCode("CAVGadkhlhfa");
+        wPartService.save(dal1);
+        
+        WPart dal2 = new WPart();
+        ModelEngine ME2= modelEngineService.findOne(8L);
+        dal2.setModelEngine(ME2);  
+        dal2.setStatus("A1 variklis CTJA");
+        dal2.setFullCode("CTJAadkhlhfa");
+        dal2.setYear(Year.of(2013));
+        wPartService.save(dal2);
+        
+        WPart dal3 = new WPart();
+        ModelEngine ME3= modelEngineService.findOne(11L);
+        dal3.setModelEngine(ME3);  
+        dal3.setStatus("A1 variklis CAYC");
+        dal3.setFullCode("CAYCadkhlhfa");
+        dal3.setYear(Year.of(2011));
+        wPartService.save(dal3);
+
 	}
 
 	// private void readHeader() throws IOException {
@@ -134,6 +165,10 @@ public class ImportDB {
         ModelEngine modelengine = getModelEngine(model, engine, fromME, toME);
         
         }
+        
+
+        
+        
 		return make;
 	};
 

@@ -24,5 +24,10 @@ public WPart findOne(Long id)
 {
     return WPartRepository.findOne(id);
 }
+
+public WPart save(WPart me)
+{
+    return WPartRepository.save(me);
+}
     
 }

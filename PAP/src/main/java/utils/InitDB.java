@@ -1,8 +1,10 @@
 package utils;
 
 import java.time.Month;
+import java.time.Year;
 import java.time.YearMonth;
 
+import lt.pap.config.SpringDataConfig;
 import lt.pap.model.Engine;
 import lt.pap.model.FuelType;
 import lt.pap.model.Make;
@@ -12,6 +14,7 @@ import lt.pap.model.ModelGroup;
 import lt.pap.model.Part;
 import lt.pap.model.PartTranslated;
 import lt.pap.model.User;
+import lt.pap.model.WPart;
 import lt.pap.service.EngineService;
 import lt.pap.service.FuelTypeService;
 import lt.pap.service.MakeService;
@@ -20,6 +23,7 @@ import lt.pap.service.ModelGroupService;
 import lt.pap.service.ModelService;
 import lt.pap.service.PartService;
 import lt.pap.service.UserService;
+import lt.pap.service.WPartService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +58,9 @@ public class InitDB {
   
   @Autowired
   private FuelTypeService fuelTypeService;
+  
+  @Autowired
+  private WPartService wPartService;
   
   @Test
   public void init() {
