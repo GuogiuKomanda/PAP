@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "pap", name = "fuel_type")
+@Table(schema = "pap", name = "fueltype")
 public class FuelType extends AbstractEntity
 {
 

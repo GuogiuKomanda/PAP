@@ -4,6 +4,7 @@ import java.util.List;
 
 import lt.pap.dao.FuelTypeRepository;
 import lt.pap.model.FuelType;
+import lt.pap.model.Make;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,9 @@ public class FuelTypeService
     {
         return fueltypeRepository.save(fuel);
     }
+    
+    public FuelType findByName(String name) {
+        return fueltypeRepository.findByName(name);
+      }
     
 }

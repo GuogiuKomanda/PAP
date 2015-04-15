@@ -11,8 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lt.pap.config.SpringDataConfig;
+import lt.pap.model.Engine;
+import lt.pap.model.FuelType;
 import lt.pap.model.Make;
 import lt.pap.model.Model;
+import lt.pap.model.ModelEngine;
 import lt.pap.model.ModelGroup;
 import lt.pap.service.EngineService;
 import lt.pap.service.FuelTypeService;
@@ -34,7 +37,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ImportDB {
 
 	private static String IMPPORT_DIR = "C:\\pap\\import\\";
-	private static String FILE_NAME = "TestCSVms.csv";
+	private static String FILE_NAME = "TestCSV.csv";
 
 	private static DateTimeFormatter yearMonthFormatter = DateTimeFormatter
 			.ofPattern("MM.yyyy");
@@ -106,6 +109,31 @@ public class ImportDB {
 		YearMonth to = toString.equals("today") ? null : YearMonth.parse(toString, yearMonthFormatter);
 		Model model = getModel(modelGroup, modelName, from, to);
 
+		String fueltypeName = items[5];
+        FuelType fueltype = getFuelType(fueltypeName);
+		
+        
+        String engineName = items[6];
+        String engineKwString = items[7];
+        String engineCcString = items[8];
+        String engineCodeAll = items[9];
+        int engineCc = Integer.parseInt(engineCcString);
+        int engineKw = Integer.parseInt(engineKwString);
+       
+        String[] engineCodes = engineCodeAll.split(", ");
+        String fromMEString = items[10];
+        String toMEString = items[11];
+
+        YearMonth fromME = YearMonth.parse(fromMEString, yearMonthFormatter);
+        YearMonth toME = toMEString.equals("today") ? null : YearMonth.parse(toMEString, yearMonthFormatter);
+        
+        for(int i = 0; i<engineCodes.length; i++) {
+        
+        
+        Engine engine = getEngine(fueltype, engineName, engineKw, engineCc, engineCodes[i]);
+        ModelEngine modelengine = getModelEngine(model, engine, fromME, toME);
+        
+        }
 		return make;
 	};
 
@@ -119,7 +147,50 @@ public class ImportDB {
 		return make;
 	}
 
-	private ModelGroup getModelGroup(Make make, String mgName) {
+	private ModelEngine getModelEngine(Model model, Engine engine, YearMonth fromME, YearMonth toME)
+    { ModelEngine modelengine= modelEngineService.findByModelAndEngine(model, engine);
+      if (modelengine == null)
+      {
+          modelengine = new ModelEngine();
+          modelengine.setModel(model);
+          modelengine.setEngine(engine);
+          modelengine.setFrom(fromME);
+          modelengine.setTo(toME);
+          modelEngineService.save(modelengine);
+          
+      }
+	    
+	    return modelengine;
+    }
+
+    private Engine getEngine(FuelType fueltype, String engineName, int engineKw, int engineCc, String engineCode)
+    { Engine engine = engineService.findByCode(engineCode);
+      if (engine ==null){
+          engine = new Engine();
+          engine.setCc(engineCc);
+          engine.setCode(engineCode);
+          engine.setFuelType(fueltype);
+          engine.setKw(engineKw);
+          engine.setName(engineName);
+          engineService.save(engine);
+      
+      }
+        return engine;
+    }
+
+    private FuelType getFuelType(String name)
+    {
+	    
+       FuelType fueltype = fuelTypeService.findByName(name);
+       if (fueltype == null) {
+           fueltype = new FuelType();
+           fueltype.setName(name);
+           fuelTypeService.save(fueltype);
+       }
+        return fueltype;
+    }
+
+    private ModelGroup getModelGroup(Make make, String mgName) {
 		ModelGroup current;
 		List<ModelGroup> list = make.getModelGroupList().stream()
 				.filter(mg -> mg.getName().equals(mgName))

@@ -29,7 +29,7 @@ public class Engine extends AbstractEntity {
     private Integer cc;
     
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fuel_type_id")
+    @JoinColumn(name="fueltypeid")
     private FuelType fuelType;
 
 	public String getName() {

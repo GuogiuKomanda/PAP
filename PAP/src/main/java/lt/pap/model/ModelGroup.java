@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "pap", name = "model_group")
+@Table(schema = "pap", name = "modelgroup")
 public class ModelGroup extends AbstractEntity
 {
     
@@ -25,7 +25,7 @@ public class ModelGroup extends AbstractEntity
     private String name;   
    
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="make_id")
+    @JoinColumn(name="makeid")
     private Make make;
     
 

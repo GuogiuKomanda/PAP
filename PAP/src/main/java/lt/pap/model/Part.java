@@ -23,7 +23,7 @@ public class Part extends AbstractEntity {
 	private static final long serialVersionUID = 1362525895835990400L;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(schema = "pap", name = "parts_translated")
+	@CollectionTable(schema = "pap", name = "partstranslated")
 	@MapKeyJoinColumn(name = "locale")
 	private Map<String, PartTranslated> translated = new HashMap<String, PartTranslated>();
 

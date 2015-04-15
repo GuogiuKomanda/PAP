@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import lt.pap.model.Model;
+import lt.pap.model.ModelEngine;
+import lt.pap.service.ModelEngineService;
 import lt.pap.service.ModelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,16 @@ public class ModelsBean {
 
   private List<Model> modelList;
   
+  @Autowired
+  private ModelEngineService modelengineService;
+  
+  private List<ModelEngine> modelengineList;
+  
   @PostConstruct
   private void init() {
     modelList = modelService.findAll();
+    modelengineList = modelengineService.findAll();
+
   }
 
   public List<Model> getModelList() {
@@ -32,5 +41,16 @@ public class ModelsBean {
   public void setModelList(List<Model> modelList) {
     this.modelList = modelList;
   }
-  
+
+public List<ModelEngine> getModelengineList()
+{
+    return modelengineList;
+}
+
+public void setModelengineList(List<ModelEngine> modelengineList)
+{
+    this.modelengineList = modelengineList;
+}
+    
+
 }

@@ -18,13 +18,13 @@ public class WPart extends AbstractEntity {
 	private static final long serialVersionUID = 3544256746775808177L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "model_engine_id")
+	@JoinColumn(name = "modelengineid")
 	private ModelEngine modelEngine;
 
 	@Column(name = "year", nullable = false)
 	private Year year;
 
-	@Column(name = "full_code", nullable = false, length = 40)
+	@Column(name = "fullcode", nullable = false, length = 40)
 	private String fullCode;
 
 	@Column(name = "status", nullable = false, length = 20)

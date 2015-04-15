@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "pap", name = "model_engine")
+@Table(schema = "pap", name = "modelengine")
 public class ModelEngine extends AbstractEntity {
 	/**
      * 
@@ -18,17 +18,17 @@ public class ModelEngine extends AbstractEntity {
 	private static final long serialVersionUID = 1783088191174527679L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "model_id")
+	@JoinColumn(name = "modelid")
 	private Model model;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "engine_id")
+	@JoinColumn(name = "engineid")
 	private Engine engine;
 
-	@Column(name = "from_year", nullable = false)
+	@Column(name = "fromyear", nullable = false)
 	private YearMonth from;
 
-	@Column(name = "to_year", nullable = false)
+	@Column(name = "toyear", nullable = true)
 	private YearMonth to;
 
 	public Model getModel() {

@@ -15,7 +15,7 @@ public class User extends AbstractEntity {
 	@Column(name = "name", nullable = false, length = 40)
 	private String name;
 
-	@Column(name = "test_date", nullable = false)
+	@Column(name = "testdate", nullable = false)
 	private YearMonth date;
 
 	public String getName() {
