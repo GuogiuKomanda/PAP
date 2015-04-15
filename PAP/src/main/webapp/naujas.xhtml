@@ -56,6 +56,24 @@
 
 
 	</h:panelGrid>
+	
+	<a4j:commandButton value="Search" render="resultsTable" execute="@form" action="#{naujasBean.doSearch}"/>
+	
+	<rich:dataTable value="#{naujasBean.wpartList}" var="wp" id="resultsTable" rows="30">
+		<f:facet name="noData">
+	                Nothing found
+	            </f:facet>
+	
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Make" />
+			</f:facet>
+			<h:outputText value="#{wp.status}" />
+		</rich:column>
+	
+	</rich:dataTable>
+
+	
 </h:form>
 <h:messages />
 

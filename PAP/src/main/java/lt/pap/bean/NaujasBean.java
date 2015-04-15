@@ -1,11 +1,16 @@
 package lt.pap.bean;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 
+import lt.pap.model.Engine;
+import lt.pap.model.FuelType;
 import lt.pap.model.Make;
+import lt.pap.model.Model;
+import lt.pap.model.WPart;
 import lt.pap.model.utils.Functions;
 import lt.pap.service.FuelTypeService;
 import lt.pap.service.MakeService;
@@ -15,6 +20,7 @@ import lt.pap.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 
 @Component
 @Scope("session")
@@ -45,6 +51,8 @@ public class NaujasBean {
 	private List<SelectItem> selectedFuelTypeList;
 
 	private List<SelectItem> availableFuelTypeList;
+	
+	private List<WPart> wpartList;
 
 	@PostConstruct
 	private void init() {
@@ -64,8 +72,21 @@ public class NaujasBean {
 	}
 
 	public void updateFuelList() {
-		int i = 0;
-		i++;
+//		if (selectedModelList != null) {
+////			Make mk =  makeService.findOne(Long.parseLong(selectedMake));
+////			availableModelList = Functions.modelToSelectItems(modelService.findByModelGroupMakeId(mk.getId()));
+//			List<Long> modelIdList = selectedModelList.stream().map(m -> ((Model)m.getValue()).getId()).collect(Collectors.toList());
+////			List<>
+////			availableFuelTypeList
+//		} else {
+//			availableFuelTypeList = Functions.fuelTypeToSelectItems(fueltypeService.findAll());
+//		}
+	}
+	
+	public void doSearch(){
+		
+//		List<Engine> engineList = 
+		
 	}
 
 

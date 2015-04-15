@@ -17,11 +17,11 @@ public class ModelEngine extends AbstractEntity {
      */
 	private static final long serialVersionUID = 1783088191174527679L;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "modelid")
 	private Model model;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "engineid")
 	private Engine engine;
 
