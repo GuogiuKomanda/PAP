@@ -29,5 +29,10 @@ public WPart save(WPart me)
 {
     return WPartRepository.save(me);
 }
+
+public List<WPart> findByFilters(String make) {
+	return WPartRepository.findByFilters(make);
+}
     
+
 }

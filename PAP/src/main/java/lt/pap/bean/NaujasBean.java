@@ -16,6 +16,7 @@ import lt.pap.service.FuelTypeService;
 import lt.pap.service.MakeService;
 import lt.pap.service.ModelGroupService;
 import lt.pap.service.ModelService;
+import lt.pap.service.WPartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -37,6 +38,8 @@ public class NaujasBean {
 	@Autowired
 	private FuelTypeService fueltypeService;
 
+	@Autowired
+	private WPartService wpartService;
 	// make
 	private String selectedMake;
 
@@ -86,7 +89,8 @@ public class NaujasBean {
 	public void doSearch(){
 		
 //		List<Engine> engineList = 
-		
+//		wpartList = wpartService.findByFilters(selectedMake);
+		wpartList = wpartService.findAll();
 	}
 
 
@@ -138,4 +142,9 @@ public class NaujasBean {
 	public void setAvailableFuelTypeList(List<SelectItem> availableFuelTypeList) {
 		this.availableFuelTypeList = availableFuelTypeList;
 	}
+
+	public List<WPart> getWpartList() {
+		return wpartList;
+	}
+	
 }

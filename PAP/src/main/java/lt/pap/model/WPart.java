@@ -3,11 +3,15 @@ package lt.pap.model;
 import java.time.Year;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import lt.pap.converter.YearConverter;
+
 
 @Entity
 @Table(schema = "pap", name = "WPart")
@@ -17,11 +21,9 @@ public class WPart extends AbstractEntity {
      */
 	private static final long serialVersionUID = 3544256746775808177L;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "modelengineid")
-	private ModelEngine modelEngine;
-
+	
 	@Column(name = "year", nullable = false)
+	@Convert(converter = YearConverter.class)
 	private Year year;
 
 	@Column(name = "fullcode", nullable = false, length = 40)
@@ -29,6 +31,10 @@ public class WPart extends AbstractEntity {
 
 	@Column(name = "status", nullable = false, length = 20)
 	private String status;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "modelengineid")
+	private ModelEngine modelEngine;
 
 	public ModelEngine getModelEngine() {
 		return modelEngine;

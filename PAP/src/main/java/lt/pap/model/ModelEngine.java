@@ -3,11 +3,14 @@ package lt.pap.model;
 import java.time.YearMonth;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import lt.pap.converter.YearMonthConverter;
 
 @Entity
 @Table(schema = "pap", name = "modelengine")
@@ -26,9 +29,11 @@ public class ModelEngine extends AbstractEntity {
 	private Engine engine;
 
 	@Column(name = "fromyear", nullable = false)
+	@Convert(converter = YearMonthConverter.class)
 	private YearMonth from;
 
 	@Column(name = "toyear", nullable = true)
+	@Convert(converter = YearMonthConverter.class)
 	private YearMonth to;
 
 	public Model getModel() {

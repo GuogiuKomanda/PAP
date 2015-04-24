@@ -3,8 +3,11 @@ package lt.pap.model;
 import java.time.YearMonth;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import lt.pap.converter.YearMonthConverter;
 
 @Entity
 @Table(schema = "pap", name = "user")
@@ -16,6 +19,7 @@ public class User extends AbstractEntity {
 	private String name;
 
 	@Column(name = "testdate", nullable = false)
+	@Convert(converter = YearMonthConverter.class)
 	private YearMonth date;
 
 	public String getName() {
