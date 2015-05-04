@@ -43,12 +43,12 @@ public class NaujasBean {
 	private List<SelectItem> availableMakeList;
 
 	// model
-	private List<SelectItem> selectedModelList = new ArrayList<SelectItem>();
+	private List<Long> selectedModelList = new ArrayList<Long>();
 
 	private List<SelectItem> availableModelList;
 
 	// fuel
-	private List<SelectItem> selectedFuelTypeList= new ArrayList<SelectItem>();
+	private List<Long> selectedFuelTypeList= new ArrayList<Long>();
 
 	private List<SelectItem> availableFuelTypeList;
 	
@@ -84,7 +84,9 @@ public class NaujasBean {
 	}
 	
 	public void doSearch(){
-		wpartList = wpartService.findByFilters2(selectedMake, Functions.selectItemsToModelList(selectedModelList), Functions.selectItemsToFuelTypeList(selectedFuelTypeList));
+		
+
+		wpartList = wpartService.findByFilters2(selectedMake, selectedModelList, selectedFuelTypeList);
 	}
 
 
@@ -105,11 +107,11 @@ public class NaujasBean {
 		this.availableMakeList = availableMakeList;
 	}
 
-	public List<SelectItem> getSelectedModelList() {
+	public List<Long> getSelectedModelList() {
 		return selectedModelList;
 	}
 
-	public void setSelectedModelList(List<SelectItem> selectedModelList) {
+	public void setSelectedModelList(List<Long> selectedModelList) {
 		this.selectedModelList = selectedModelList;
 	}
 
@@ -121,11 +123,11 @@ public class NaujasBean {
 		this.availableModelList = availableModelList;
 	}
 
-	public List<SelectItem> getSelectedFuelTypeList() {
+	public List<Long> getSelectedFuelTypeList() {
 		return selectedFuelTypeList;
 	}
 
-	public void setSelectedFuelTypeList(List<SelectItem> selectedFuelTypeList) {
+	public void setSelectedFuelTypeList(List<Long> selectedFuelTypeList) {
 		this.selectedFuelTypeList = selectedFuelTypeList;
 	}
 

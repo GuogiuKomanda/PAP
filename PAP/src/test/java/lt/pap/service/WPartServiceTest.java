@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
       List<WPart> all = wpartService.findAll(); 
       List<Long> fuels = new ArrayList<Long>();
       fuels.add(1L);
-      List<WPart> parts = wpartService.findByFilters2("Audi", new ArrayList<Long>(), fuels);
+      List<WPart> parts = wpartService.findByFilters2("4", new ArrayList<Long>(), fuels);
 //      assertEquals(3, users.size());
       assertEquals(2, parts.size());
     }

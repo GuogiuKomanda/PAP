@@ -21,7 +21,7 @@ public class Functions {
 		public SelectItem apply(Make make) {
 			SelectItem item = new SelectItem();
 			item.setLabel(make.getName());
-			item.setValue(""+make.getId());
+			item.setValue(make.getId());
 			return item;
 		}
 	};
@@ -53,7 +53,7 @@ public class Functions {
 		public SelectItem apply(Model model) {
 			SelectItem item = new SelectItem();
 			item.setLabel(model.getName());
-			item.setValue(model);
+			item.setValue(model.getId());
 			return item;
 		}
 	};
@@ -63,7 +63,7 @@ public class Functions {
 		public SelectItem apply(FuelType ft) {
 			SelectItem item = new SelectItem();
 			item.setLabel(ft.getName());
-			item.setValue(ft);
+			item.setValue(ft.getId());
 			return item;
 		}
 	};
@@ -88,11 +88,11 @@ public class Functions {
 		return group;
 	}
 	
-    public static List<Long> selectItemsToModelList(List<SelectItem> items) {
-      return items.stream().map(i -> ((Model) (i.getValue())).getId()).collect(Collectors.toList());
+    public static List<Long> modelListToId(List<Model> modelList) {
+      return modelList.stream().map(i -> i.getId()).collect(Collectors.toList());
     }
     
-    public static List<Long> selectItemsToFuelTypeList(List<SelectItem> items) {
-      return items.stream().map(i -> ((FuelType) (i.getValue())).getId()).collect(Collectors.toList());
+    public static List<Long> fuelTypeListToId(List<FuelType> fuelList) {
+      return fuelList.stream().map(i -> i.getId()).collect(Collectors.toList());
     }
 }

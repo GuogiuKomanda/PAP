@@ -53,6 +53,9 @@
 			<a4j:ajax listener="#{naujasBean.updateFuelList}" />
 		</h:selectManyListbox>
 
+			<h:outputScript>
+               jQuery("#form\\:fuelSelect").chosen({});
+        	</h:outputScript>
 
 
 	</h:panelGrid>

@@ -50,7 +50,7 @@ public class WPartService {
     return WPartRepository.findByFilters(make);
   }
 
-  public List<WPart> findByFilters2(String makeName, List<Long> modelIds, List<Long> fuelTypeIds) {
+  public List<WPart> findByFilters2(String makeId, List<Long> modelIds, List<Long> fuelTypeIds) {
     CriteriaBuilder cb = em.getCriteriaBuilder();
 
     CriteriaQuery<WPart> q = cb.createQuery(WPart.class);
@@ -67,8 +67,8 @@ public class WPartService {
 
     List<Predicate> predList = new ArrayList<Predicate>();
     // make not null
-    if (makeName != null && !makeName.isEmpty()) {
-      predList.add(cb.equal(make.get("name"), makeName));
+    if (makeId != null && !makeId.isEmpty()) {
+      predList.add(cb.equal(make.get("id"), makeId));
       
     }
     //model list
