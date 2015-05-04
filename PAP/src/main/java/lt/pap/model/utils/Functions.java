@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
 
+import lombok.core.configuration.ConfigurationParser.Collector;
 import lt.pap.model.FuelType;
 import lt.pap.model.Make;
 import lt.pap.model.Model;
@@ -86,4 +87,12 @@ public class Functions {
 		group.setSelectItems(items);
 		return group;
 	}
+	
+    public static List<Long> selectItemsToModelList(List<SelectItem> items) {
+      return items.stream().map(i -> ((Model) (i.getValue())).getId()).collect(Collectors.toList());
+    }
+    
+    public static List<Long> selectItemsToFuelTypeList(List<SelectItem> items) {
+      return items.stream().map(i -> ((FuelType) (i.getValue())).getId()).collect(Collectors.toList());
+    }
 }

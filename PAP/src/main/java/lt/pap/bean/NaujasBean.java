@@ -1,15 +1,12 @@
 package lt.pap.bean;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 
-import lt.pap.model.Engine;
-import lt.pap.model.FuelType;
 import lt.pap.model.Make;
-import lt.pap.model.Model;
 import lt.pap.model.WPart;
 import lt.pap.model.utils.Functions;
 import lt.pap.service.FuelTypeService;
@@ -41,17 +38,17 @@ public class NaujasBean {
 	@Autowired
 	private WPartService wpartService;
 	// make
-	private String selectedMake;
+	private String selectedMake = "";
 
 	private List<SelectItem> availableMakeList;
 
 	// model
-	private List<SelectItem> selectedModelList;
+	private List<SelectItem> selectedModelList = new ArrayList<SelectItem>();
 
 	private List<SelectItem> availableModelList;
 
 	// fuel
-	private List<SelectItem> selectedFuelTypeList;
+	private List<SelectItem> selectedFuelTypeList= new ArrayList<SelectItem>();
 
 	private List<SelectItem> availableFuelTypeList;
 	
@@ -87,10 +84,7 @@ public class NaujasBean {
 	}
 	
 	public void doSearch(){
-		
-//		List<Engine> engineList = 
-//		wpartList = wpartService.findByFilters(selectedMake);
-		wpartList = wpartService.findAll();
+		wpartList = wpartService.findByFilters2(selectedMake, Functions.selectItemsToModelList(selectedModelList), Functions.selectItemsToFuelTypeList(selectedFuelTypeList));
 	}
 
 
